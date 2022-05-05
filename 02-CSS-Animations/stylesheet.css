@@ -1,80 +1,85 @@
-body {
-  font-family: "Montserrat", sans-serif;
-  color: rgb(64, 32, 132);
+:root {
+  --primary: #f13c20;
+  --secondary: #3ee29e;
+  --light: #ece9dfc0;
+  --dark: #4056a1;
+  --accent: #d79922;
 }
 
-div {
+body {
+  font-family: "Montserrat";
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+.title,
+.gallery {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-div#gallery {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  padding: 24px;
-}
-
-div.thumbnail {
+.thumbnail {
   display: grid;
+  margin: 2rem;
   grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
 
-img.photo {
-  width: 320px;
-  height: 240px;
-  grid-column: 1;
-  grid-row: 1;
-  margin: 10px;
-}
-
-div.screen {
-  width: 320px;
-  height: 240px;
-  margin: 10px;
-  grid-column: 1;
-  grid-row: 1;
-  background-color: rgba(124, 124, 124, 0.48);
+.thumbnail:hover {
   cursor: pointer;
-  transition-property: background-color, font-size, color;
-  transition-duration: 0.333s;
 }
 
-div.spinner {
-  width: 320px;
-  height: 240px;
-  margin: 10px;
-  grid-column: 1;
-  grid-row: 1;
-  font-size: 0px;
-  transform: rotate(90deg);
-  transition-property: transform;
-  transition-duration: 0.333s;
+.screen {
+  width: 20rem;
+  height: 20rem;
+  grid-column-start: 1;
+  grid-row-start: 1;
 }
 
-div.spinner:hover {
+.photo {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  filter: grayscale(75%);
+  transition-property: opacity;
+  transition-duration: 0.333s;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.thumbnail:hover .photo {
+  opacity: 50%;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  color: var(--light);
+  font-size: 0rem;
+  transform: rotate(180deg);
+  grid-column-start: 1;
+  grid-row-start: 1;
+  transition-property: font-size, transform;
+  transition-duration: 0.333s;
+  transition-timing-function: cubic-bezier(0, 1.2, 1, 1.2);
+}
+
+.thumbnail:hover .icon {
+  font-size: 12rem;
   transform: rotate(0deg);
-  color: rgb(255, 255, 255, 0.75);
-  font-size: 224px;
 }
 
-.screen:hover {
+#one {
+  background-color: var(--primary);
 }
 
-#screen-01:hover {
-  background-color: rgba(44, 180, 30, 0.58);
+#two {
+  background-color: var(--secondary);
 }
 
-#screen-02:hover {
-  background-color: rgba(32, 94, 198, 0.58);
-}
-
-#screen-03:hover {
-  background-color: rgba(198, 120, 32, 0.58);
-}
-
-#screen-01:active,
-#screen-02:active,
-#screen-03:active {
-  background-color: black;
+#three {
+  background-color: var(--accent);
 }

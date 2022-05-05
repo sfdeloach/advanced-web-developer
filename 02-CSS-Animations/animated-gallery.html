@@ -1,50 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Example Animated Gallery</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
-    <script
-      src="https://kit.fontawesome.com/1eaa818f96.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div>
+
+<head>
+  <title>Example Animated Gallery</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet" type="text/css" />
+  <link href="./stylesheet.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div class="content">
+    <div class="title">
       <h1>An Image Gallery</h1>
     </div>
-    <div id="gallery">
+    <div class="gallery">
       <div class="thumbnail">
-        <img
-          class="photo"
-          src="https://images.freeimages.com/images/large-previews/bed/george-washington-valley-forge-headquarters-1204202.jpg"
-          alt="valley forge headquarter"
-        />
-        <div id="screen-01" class="screen"></div>
-        <div class="spinner">♔</div>
+        <div class="screen" id="one"></div>
+        <img class="photo" src="https://images.freeimages.com/images/large-previews/bed/george-washington-valley-forge-headquarters-1204202.jpg" alt="valley forge headquarter" />
+        <div class="icon">&#9312;</div>
       </div>
       <div class="thumbnail">
-        <img
-          class="photo"
-          src="https://images.freeimages.com/images/large-previews/48e/brooklyn-bridge-1566599.jpg"
-          alt="brooklyn bridge"
-        />
-        <div id="screen-02" class="screen"><span class="spinner">&nbsp;♕&nbsp;</span></div>
+        <div class="screen" id="two"></div>
+        <img class="photo" src="https://images.freeimages.com/images/large-previews/48e/brooklyn-bridge-1566599.jpg" alt="brooklyn bridge" />
+        <div class="icon">&#9313;</div>
       </div>
       <div class="thumbnail">
-        <img
-          class="photo"
-          src="https://images.freeimages.com/images/large-previews/cdb/mount-rushmore-from-trail-1543219.jpg"
-          alt="mount rushmore"
-        />
-        <div id="screen-03" class="screen"><span class="spinner">&nbsp;♖&nbsp;</span></div>
+        <div class="screen" id="three"></div>
+        <img class="photo" src="https://images.freeimages.com/images/large-previews/cdb/mount-rushmore-from-trail-1543219.jpg" alt="mount rushmore" />
+        <div class="icon">&#9314;</div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
