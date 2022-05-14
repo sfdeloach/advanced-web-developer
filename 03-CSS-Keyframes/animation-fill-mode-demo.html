@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <style>
-    @keyframes red-to-yellow {
-      0% {
-        background-color: yellow;
-      }
-      100% {
-        background-color: red;
-      }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<style>
+  @keyframes red-to-yellow {
+    0% {
+      background-color: yellow;
     }
 
-    .box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: green;
-      color: white;
-      border-radius: 5px;
-      height: 50px;
+    100% {
+      background-color: red;
     }
+  }
 
-    .box:hover {
-      animation-name: red-to-yellow;
-      animation-duration: 4s;
-      animation-timing-function: linear;
-      animation-delay: 2s;
-    }
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    height: 50px;
+  }
 
-    .forwards {
-      animation-fill-mode: forwards;
-    }
+  .box:hover {
+    animation-name: red-to-yellow;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-delay: 2s;
+  }
 
-    .backwards {
-      animation-fill-mode: backwards;
-    }
+  .forwards {
+    animation-fill-mode: forwards;
+  }
 
-    .both {
-      animation-fill-mode: both;
-    }
-  </style>
-  <body>
-    <p class="box">NONE</p>
-    <p class="box forwards">FORWARDS - stays red at the end</p>
-    <p class="box backwards">BACKWARDS - turns yellow immediately</p>
-    <p class="box both">
-      BOTH - turns yellow immediately and stays red at the end
-    </p>
-  </body>
+  .backwards {
+    animation-fill-mode: backwards;
+  }
+
+  .both {
+    animation-fill-mode: both;
+  }
+</style>
+
+<body>
+  <p class="box">NONE</p>
+  <p class="box forwards">FORWARDS - stays red at the end</p>
+  <p class="box backwards">BACKWARDS - turns yellow immediately</p>
+  <p class="box both">
+    BOTH - turns yellow immediately and stays red at the end
+  </p>
+</body>
+
 </html>
