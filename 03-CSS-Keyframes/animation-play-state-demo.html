@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @keyframes slide {
+        0% {
+          transform: translate(-300px);
+        }
+        100% {
+          transform: translate(300px);
+        }
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
+      }
+
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+        color: rgb(255, 206, 176);
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-weight: bold;
+        background-color: rgb(15, 15, 165);
+        border-radius: 50px;
+        width: 150px;
+        height: 150px;
+        animation-name: slide;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+
+      .box:hover {
+        animation-play-state: paused;
+      }
+
+      .forward {
+        animation-direction: forward;
+      }
+
+      .reverse {
+        animation-direction: reverse;
+      }
+
+      .alternate {
+        animation-direction: alternate;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <span class="box forward">FORWARD</span>
+    </div>
+    <div>
+      <span class="box reverse">REVERSE</span>
+    </div>
+    <div>
+      <span class="box alternate">ALTERNATE</span>
+    </div>
+  </body>
+</html>
