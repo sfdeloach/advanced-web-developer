@@ -1,0 +1,85 @@
+:root {
+  --primary: #f13c20;
+  --secondary: #3ee29e;
+  --light: #ece9dfc0;
+  --dark: #4056a1;
+  --accent: #d79922;
+}
+
+body {
+  font-family: "Montserrat";
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+.title,
+.gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail {
+  display: grid;
+  margin: 2rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.thumbnail:hover {
+  cursor: pointer;
+}
+
+.screen {
+  width: 20rem;
+  height: 20rem;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.photo {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+  filter: grayscale(75%);
+  transition-property: opacity;
+  transition-duration: 0.333s;
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.thumbnail:hover .photo {
+  opacity: 50%;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  color: var(--light);
+  font-size: 0rem;
+  transform: rotate(180deg);
+  grid-column-start: 1;
+  grid-row-start: 1;
+  transition-property: font-size, transform;
+  transition-duration: 0.333s;
+  transition-timing-function: cubic-bezier(0, 1.2, 1, 1.2);
+}
+
+.thumbnail:hover .icon {
+  font-size: 12rem;
+  transform: rotate(0deg);
+}
+
+#one {
+  background-color: var(--primary);
+}
+
+#two {
+  background-color: var(--secondary);
+}
+
+#three {
+  background-color: var(--accent);
+}
