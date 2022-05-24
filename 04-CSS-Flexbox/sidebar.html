@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      #main {
+        display: flex;
+      }
+
+      #sidebar {
+        background-color: rgba(42, 42, 82, 0.8);
+        width: 22vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      #sidebar .section {
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+      }
+
+      #sidebar .section .link {
+        color: lightgray;
+        text-decoration: none;
+        font-size: 20px;
+        padding-bottom: 15px;
+      }
+
+      #sidebar .section .link:hover {
+        color: white;
+      }
+
+      #content {
+        width: 78vw;
+        padding: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="sidebar">
+        <div class="section">
+          <a class="link" href="#">Messages</a>
+          <a class="link" href="#">Friends</a>
+          <a class="link" href="#">User Profile</a>
+        </div>
+        <div class="section">
+          <a class="link" href="#">Settings</a>
+          <a class="link" href="#">Questions?</a>
+        </div>
+      </div>
+      <div id="content">Main content goes here...</div>
+    </div>
+  </body>
+</html>
