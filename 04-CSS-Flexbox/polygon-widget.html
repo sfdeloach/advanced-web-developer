@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --white: #fde8e8;
+            --scarlet: #f33939;
+            --red: #d65959;
+            --maroon: #ac3636;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            flex: 1 1 200px;
+            padding: 20px;
+            color: var(--white);
+            background-color: var(--red);
+            transition: background-color 0.25s;
+        }
+
+        .box:nth-child(even) {
+            background-color: var(--maroon);
+        }
+
+        .box:hover {
+            background-color: var(--scarlet);
+            cursor: pointer;
+        }
+
+        .box>.topic {
+            text-transform: uppercase;
+            font-size: small;
+            margin-bottom: 20px;
+        }
+
+        .box>.headline {
+            font-weight: bold;
+            font-size: large;
+        }
+
+        @media screen and (max-width: 768px) {
+            .box {
+                padding: 12px;
+            }
+
+            .box>.topic {
+                margin-bottom: 12px;
+            }
+
+            .box>.headline {
+                font-size: medium;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="topic">tv</div>
+            <div class="headline">Rick and Morty review: a remorseful, emotional romp built on escapism</div>
+        </div>
+        <div class="box">
+            <div class="topic">news</div>
+            <div class="headline">Playerunknown's Battlegrounds 'stream sniping' ban divides community</div>
+        </div>
+        <div class="box">
+            <div class="topic">news</div>
+            <div class="headline">Video game releases for August 2017</div>
+        </div>
+    </div>
+</body>
+
+</html>
