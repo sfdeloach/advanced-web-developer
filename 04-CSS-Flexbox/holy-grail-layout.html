@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Holy Grail Layout</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            font-family: sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header,
+        article,
+        nav,
+        aside,
+        footer {
+            display: flex;
+            flex-direction: column;
+            margin: 3px;
+            border-radius: 6px;
+        }
+
+        header,
+        footer {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: darkseagreen;
+            padding: 0px 16px;
+        }
+
+        header {
+            flex-basis: 50px;
+        }
+
+        footer {
+            flex-basis: 30px;
+            justify-content: center;
+        }
+
+        main {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        main>* {
+            padding: 16px;
+        }
+
+        article {
+            background: white;
+            flex-grow: 1;
+        }
+
+        nav {
+            background: gainsboro;
+            flex-basis: 15%;
+            order: -1;
+        }
+
+        aside {
+            background: lightskyblue;
+            flex-basis: 20%;
+        }
+
+        @media screen and (max-width: 640px) {
+            main {
+                flex-direction: column;
+            }
+
+            nav {
+                order: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="#">Header Left</a>
+        <a href="#">Header Right</a>
+    </header>
+    <main>
+        <article>
+            Article
+        </article>
+        <nav>
+            Nav
+        </nav>
+        <aside>
+            Aside
+        </aside>
+    </main>
+    <footer>
+        Footer
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+<style>
+  :root {
+    --grass: #4672c4;
+    --sky: #14435e;
+    --dirt: #DAAD86;
+    --mud: #c2daff;
+    --sand: #83e0f7;
+  }
+
+  html,
+  body {
+    margin: 0;
+  }
+
+  .navbar {
+    background-color: var(--sky);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .navbar .item {
+    font-family: Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    color: var(--sand);
+    text-decoration: none;
+    margin-right: 24px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--grass);
+    transition-property: color;
+    transition-duration: 0.5s;
+  }
+
+  .item:hover,
+  .item:hover .symbol {
+    color: var(--mud);
+  }
+
+  .symbol {
+    color: var(--grass);
+    padding-right: 5px;
+    font-size: 24px;
+    transition-property: color;
+    transition-duration: 0.5s;
+  }
+
+  @media screen and (max-width: 900px) {
+    .navbar {
+      justify-content: space-around;
+    }
+
+    .navbar .item {
+      font-size: 12px;
+    }
+
+    .navbar .item .symbol {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 424px) {
+    .navbar {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+</style>
+
+<body>
+  <nav class="navbar">
+    <a href="#" class="item"><span class="symbol">家</span>Home</a>
+    <a href="#" class="item"><span class="symbol">關</span>About</a>
+    <a href="#" class="item"><span class="symbol">接</span>Contact</a>
+    <a href="#" class="item"><span class="symbol">狗</span>Dogs</a>
+  </nav>
+</body>
+
+</html>
