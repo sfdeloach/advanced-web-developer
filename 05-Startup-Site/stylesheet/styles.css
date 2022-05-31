@@ -1,0 +1,149 @@
+/* animations */
+
+@keyframes slideup {
+  from {
+    opacity: 0%;
+    transform: translateY(25%);
+  }
+
+  to {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0%;
+  }
+
+  to {
+    opacity: 100%;
+  }
+}
+
+/* general */
+
+* {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* top */
+
+#top {
+  display: flex;
+  flex-direction: column;
+  background-image: url("./max-fleischmann-4wcI3YQAWpI-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 80%;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0px 40px;
+  animation: fadein 0.5s linear 0.5s 1 normal backwards;
+}
+
+header .left {
+  font-size: 26px;
+}
+
+header a {
+  color: gainsboro;
+  padding: 0px 20px;
+  transition: color 0.2s;
+}
+
+header a:hover {
+  color: gray;
+}
+
+header a:active {
+  color: gainsboro;
+}
+
+header #hamburger {
+  display: none;
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 4px;
+  opacity: 70%;
+}
+
+header #hamburger:active {
+  background-color: gray;
+}
+
+#billboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  animation: slideup 0.5s ease-in 1s 1 normal backwards;
+}
+
+#billboard * {
+  padding: 0 20px 20px;
+}
+
+#billboard > h1 {
+  font-size: 60px;
+}
+
+#billboard > h1,
+#billboard > h2 {
+  text-align: center;
+}
+
+#billboard > button {
+  color: gainsboro;
+  background-color: crimson;
+  cursor: pointer;
+  padding-top: 20px;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+#billboard > button:hover {
+  background-color: brown;
+}
+
+#billboard > button:active {
+  background-color: crimson;
+}
+
+/* responsive */
+
+@media screen and (max-width: 600px) {
+  header {
+    padding: 0 20px;
+  }
+
+  header a {
+    display: none;
+  }
+
+  header #hamburger {
+    display: block;
+  }
+}
