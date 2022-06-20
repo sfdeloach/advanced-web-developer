@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMLHttpRequest Example</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+    }
+  </style>
+  <body>
+    <h1 id="zen-message">Standby for Zen...</h1>
+  </body>
+  <script>
+    setInterval(function () {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          document.querySelector("#zen-message").innerHTML = xhr.responseText;
+        }
+      };
+      xhr.open("GET", "https://api.github.com/zen");
+      xhr.send();
+    }, 5000);
+  </script>
+</html>
