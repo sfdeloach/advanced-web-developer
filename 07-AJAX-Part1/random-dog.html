@@ -1,0 +1,54 @@
+<!-- A simple AJAX example -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Dog Example</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        img {
+            max-height: 375px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Random Dog Pictures</h1>
+        <img>
+        <button type="button">Get Random Dogs!</button>
+    </div>
+</body>
+<script>
+    var getRandomDogPicture = function () {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.querySelector("img").setAttribute("src", xhr.response.message);
+            }
+        }
+
+        xhr.responseType = "json";
+        xhr.open("GET", "https://dog.ceo/api/breeds/image/random");
+        xhr.send();
+    }
+
+    window.onload = getRandomDogPicture;
+
+    document.querySelector("button").onclick = function () {
+        getRandomDogPicture();
+    }
+</script>
+
+</html>
