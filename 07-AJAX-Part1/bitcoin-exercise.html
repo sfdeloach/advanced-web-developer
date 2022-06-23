@@ -9,26 +9,25 @@
       button {
         margin-top: 8px;
       }
+
       span {
         color: darkgreen;
       }
     </style>
   </head>
+
   <body>
     <h1>Bitcoin Price: <span></span></h1>
     <fieldset>
       <legend>Select a fiat currency:</legend>
-
       <div>
         <input type="radio" id="eur" name="fiat" value="eur" checked />
         <label for="eur">&euro; EUR</label>
       </div>
-
       <div>
         <input type="radio" id="gbp" name="fiat" value="gbp" />
         <label for="gbp">&pound; GBP</label>
       </div>
-
       <div>
         <input type="radio" id="usd" name="fiat" value="usd" />
         <label for="usd">&#36; USD</label>
@@ -39,36 +38,32 @@
   <script>
     var getPrice = function (fiat) {
       var priceDisplay = document.querySelector("span");
-      priceDisplay.innerHTML = "loading...";
       var xhr = new XMLHttpRequest();
+
+      priceDisplay.innerHTML = "loading...";
+
+      xhr.responseType = "json";
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-          switch (fiat) {
-            case "eur":
-              priceDisplay.innerHTML = "&euro;" + xhr.response.bpi.EUR.rate;
-              break;
-            case "gbp":
-              priceDisplay.innerHTML = "&pound;" + xhr.response.bpi.GBP.rate;
-              break;
-            case "usd":
-              priceDisplay.innerHTML = "&#36;" + xhr.response.bpi.USD.rate;
-              break;
-            default:
-              break;
-          }
+          var currency = xhr.response.bpi[fiat];
+          priceDisplay.innerHTML = currency.symbol + currency.rate;
         }
       };
-      xhr.responseType = "json";
       xhr.open("GET", "https://api.coindesk.com/v1/bpi/currentprice.json");
       xhr.send();
     };
 
     window.addEventListener("load", function () {
-      getPrice("eur");
+      getPrice("EUR");
     });
 
     document.querySelector("button").addEventListener("click", function () {
-      getPrice("usd");
+      var radioButtons = document.querySelectorAll("input[name='fiat']");
+      radioButtons.forEach(function (fiat) {
+        if (fiat.checked) {
+          getPrice(fiat.value.toUpperCase());
+        }
+      });
     });
   </script>
 </html>
