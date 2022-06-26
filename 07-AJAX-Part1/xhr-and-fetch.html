@@ -20,8 +20,15 @@
     xhr.send();
 
     // The fetch way
-    fetch(url).then(function (response) {
-      console.log(response);
-    });
+    fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+      })
+      .catch(function (error) {
+        console.error("Error: ", error);
+      });
   </script>
 </html>
