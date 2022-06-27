@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparing XMLHttpRequest with fetch</title>
+  </head>
+  <body>
+    <p>Open the console to see the fetched data.</p>
+    <button id="getData">Fetch!</button>
+  </body>
+  <script>
+    var button = document.getElementById("getData");
+
+    button.addEventListener("click", function () {
+      var url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+      fetch(url)
+        .then(handleErrors)
+        .then(getJSON)
+        .then(logData)
+        .catch(displayError);
+    });
+
+    function handleErrors(response) {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      console.log("No errors detected.");
+      return response;
+    }
+
+    function getJSON(response) {
+      console.log("Extracting JSON data from response.");
+      return response.json();
+    }
+
+    function logData(data) {
+      console.log(data);
+      return;
+    }
+
+    function displayError(error) {
+      console.error("from displayError: ", error);
+      return;
+    }
+  </script>
+</html>

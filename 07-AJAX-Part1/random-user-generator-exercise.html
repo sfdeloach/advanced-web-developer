@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random User Generator Example</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #e9eef0;
+        font-family: sans-serif;
+      }
+
+      #main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+      }
+
+      #title {
+        font-size: 32px;
+        padding-bottom: 12px;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 400px;
+        background-color: white;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 12px;
+      }
+
+      .photo {
+        display: flex;
+        align-items: center;
+      }
+
+      .photo > img {
+        border-radius: 100%;
+      }
+
+      .info {
+        padding-left: 24px;
+      }
+
+      .info .name {
+        color: #54aa8d;
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .info .username {
+        color: dodgerblue;
+        font-size: 14px;
+        font-weight: bold;
+        padding-bottom: 12px;
+      }
+
+      .info .email,
+      .info .city {
+        color: gray;
+        font-size: 14px;
+      }
+
+      .button {
+        display: flex;
+        justify-content: center;
+        width: 400px;
+        color: white;
+        font-weight: bold;
+        background-color: #54aa8d;
+        padding: 12px;
+        cursor: pointer;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      .button:hover {
+        background-color: #66cdaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="title">Random User Generator</div>
+      <div class="user-info">
+        <div class="photo">
+          <img
+            src="https://randomuser.me/api/portraits/med/men/15.jpg"
+            alt="photo"
+          />
+        </div>
+        <div class="info">
+          <div class="name">sam mcdonalid</div>
+          <div class="username">redgoose710</div>
+          <div class="email">Email: sam.mcdonalid@example.com</div>
+          <div class="city">City: lincoln</div>
+        </div>
+      </div>
+      <div class="button">Next User!</div>
+    </div>
+  </body>
+</html>
