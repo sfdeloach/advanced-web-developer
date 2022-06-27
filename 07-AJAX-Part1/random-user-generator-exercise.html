@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random User Generator Example</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
       body {
         margin: 0;
         background-color: #e9eef0;
-        font-family: sans-serif;
+        font-family: "Josefin Sans", sans-serif;
       }
 
       #main {
@@ -49,21 +51,21 @@
         padding-left: 24px;
       }
 
-      .info .name {
+      .info #name {
         color: #54aa8d;
         font-size: 24px;
         font-weight: bold;
       }
 
-      .info .username {
+      .info #username {
         color: dodgerblue;
         font-size: 14px;
         font-weight: bold;
         padding-bottom: 12px;
       }
 
-      .info .email,
-      .info .city {
+      .info #email,
+      .info #city {
         color: gray;
         font-size: 14px;
       }
@@ -73,7 +75,6 @@
         justify-content: center;
         width: 400px;
         color: white;
-        font-weight: bold;
         background-color: #54aa8d;
         padding: 12px;
         cursor: pointer;
@@ -84,6 +85,24 @@
       .button:hover {
         background-color: #66cdaa;
       }
+
+      .button:active {
+        background-color: #54aa8d;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in 0s 1;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
@@ -91,19 +110,82 @@
       <div id="title">Random User Generator</div>
       <div class="user-info">
         <div class="photo">
-          <img
-            src="https://randomuser.me/api/portraits/med/men/15.jpg"
-            alt="photo"
-          />
+          <img src="" alt="loading" class="animate" />
         </div>
         <div class="info">
-          <div class="name">sam mcdonalid</div>
-          <div class="username">redgoose710</div>
-          <div class="email">Email: sam.mcdonalid@example.com</div>
-          <div class="city">City: lincoln</div>
+          <div id="name" class="animate">loading...</div>
+          <div id="username" class="animate">loading...</div>
+          <div id="email" class="animate">Email: <span>loading...</span></div>
+          <div id="city" class="animate">City: <span>loading...</span></div>
         </div>
       </div>
       <div class="button">Next User!</div>
     </div>
   </body>
+  <script>
+    function checkForErrors(response) {
+      if (!response.ok) {
+        throw Error(response.status);
+      }
+      return response;
+    }
+
+    function getData(response) {
+      return response.json();
+    }
+
+    // receive JSON data, update contents on page with a fade in effect
+    function updateUser(data) {
+      var userData = data.results[0];
+      var animations = document.querySelectorAll(".animate");
+
+      // update user data on page
+      document
+        .querySelector(".photo > img")
+        .setAttribute("src", userData.picture.medium);
+
+      document.querySelector(".info #name").innerHTML = [
+        userData.name.first.toLowerCase(),
+        userData.name.last.toLowerCase(),
+      ].join(" ");
+
+      document.querySelector(".info #username").innerHTML =
+        userData.login.username;
+
+      document.querySelector(".info #email > span").innerHTML = userData.email;
+
+      document.querySelector(".info #city > span").innerHTML =
+        userData.location.city;
+
+      // fade in effect triggered
+      animations.forEach(function (item) {
+        item.className = "animate fade-in";
+      });
+
+      // fade in effect reset
+      setTimeout(function () {
+        animations.forEach(function (item) {
+          item.className = "animate";
+        });
+      }, 500);
+    }
+
+    function handleError(error) {
+      console.error(error);
+    }
+
+    function updatePage() {
+      fetch(url)
+        .then(checkForErrors)
+        .then(getData)
+        .then(updateUser)
+        .catch(handleError);
+    }
+
+    var url = "https://randomuser.me/api/";
+    var nextUserButton = document.querySelector(".button");
+
+    window.onload = updatePage;
+    nextUserButton.addEventListener("click", updatePage);
+  </script>
 </html>
