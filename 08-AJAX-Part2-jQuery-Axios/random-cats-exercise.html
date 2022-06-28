@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Image Exercise w/ jQuery</title>
+  </head>
+  <body>
+    <h1>Random Photos w/ jQuery!</h1>
+    <p>
+      AJAX call imports an array of 8 image urls. Each click of the button loads a new image from
+      the array. Once the end of the array is reached, the next 8 image urls are loaded.
+    </p>
+    <button>Get Random Image</button>
+    <div style="padding-top: 12px">
+      <img
+        src="#"
+        alt="loading"
+        style="width: 640px; height: 480px; object-fit: cover; border-radius: 12px"
+      />
+    </div>
+    <script src="jquery-3.6.0.js"></script>
+    <script>
+      var imageURLs = [];
+      var imageNumber = 0;
+
+      // closure used to safeguard the page number variable
+      var nextUrlList = (function nextURL() {
+        var page = 1;
+        return function () {
+          return ["https://picsum.photos/v2/list?page=", page++, "&limit=8"].join("");
+        };
+      })();
+
+      function getImageURLs() {
+        return new Promise(function (resolve, reject) {
+          $.getJSON(nextUrlList())
+            .done(function (imageList) {
+              imageList.forEach(function (data) {
+                imageURLs.push(data.download_url);
+              });
+              resolve();
+            })
+            .fail(function () {
+              alert("something went wrong");
+            });
+        });
+      }
+
+      $(document).ready(
+        getImageURLs().then(function () {
+          $("img").attr({ src: imageURLs[0] });
+        })
+      );
+
+      $("button").click(function () {
+        if (!imageURLs.length) {
+          alert("image array is empty");
+        }
+        $("img").attr({ src: imageURLs[++imageNumber] });
+        if (imageURLs.length - 1 === imageNumber) {
+          imageURLs = [];
+          imageNumber = -1;
+          getImageURLs();
+        }
+      });
+    </script>
+  </body>
+</html>
