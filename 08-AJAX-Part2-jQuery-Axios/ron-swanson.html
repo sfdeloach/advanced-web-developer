@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ron Swanson Random Quotes</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Ubuntu", sans-serif;
+      }
+
+      h1,
+      h2,
+      p {
+        text-align: center;
+        width: 75%;
+      }
+
+      #btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 60px;
+        width: 75%;
+      }
+
+      button {
+        font-family: inherit;
+        color: limegreen;
+        background-color: white;
+        cursor: pointer;
+        border: 2px solid limegreen;
+        border-radius: 16px;
+        height: 32px;
+        transition-property: color, background-color;
+        transition-duration: 400ms;
+        flex-grow: 1;
+      }
+
+      button:hover {
+        color: white;
+        background-color: limegreen;
+      }
+
+      button:active {
+        color: limegreen;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ron Swanson Quote Generator</h1>
+    <p>(4 ways of writing AJAX requests)</p>
+    <div id="btns">
+      <button id="xhr">XHR</button>
+      <button id="fetch">Fetch</button>
+      <button id="jQuery">jQuery</button>
+      <button id="axios">Axios</button>
+    </div>
+    <h2 id="quote">Click a button</h2>
+    <script src="jquery-3.6.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      var url = "https://ron-swanson-quotes.herokuapp.com/v2/quotes";
+
+      function updateQuote(text) {
+        document.getElementById("quote").innerText = '"' + text + '"';
+      }
+
+      // XHR way
+      document.getElementById("xhr").addEventListener("click", function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.responseType = "json";
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            updateQuote(xhr.response[0]);
+          }
+        };
+        xhr.send();
+      });
+
+      // fetch way
+      document.getElementById("fetch").addEventListener("click", function () {
+        fetch(url)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            updateQuote(data[0]);
+          })
+          .catch(function (error) {
+            console.error(error);
+            alert(error);
+          });
+      });
+
+      // jQuery way
+      $("#jQuery").click(function () {
+        $.getJSON(url)
+          .done(function (data) {
+            $("#quote").text('"' + data[0] + '"');
+          })
+          .fail(function (error) {
+            console.error(error);
+            alert(error);
+          });
+      });
+
+      // axios way
+      document.getElementById("axios").addEventListener("click", function () {
+        axios
+          .get(url)
+          .then(function (response) {
+            updateQuote(response.data[0]);
+          })
+          .catch(function (error) {
+            console.error(error);
+            alert(error);
+          });
+      });
+    </script>
+  </body>
+</html>
