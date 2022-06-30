@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test with Hooks</title>
+    <link
+      rel="shortcut icon"
+      href="./jasmine-3.6.0/jasmine_favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./jasmine-3.6.0/jasmine.css" />
+  </head>
+  <body>
+    <script src="./jasmine-3.6.0/jasmine.js"></script>
+    <script src="./jasmine-3.6.0/jasmine-html.js"></script>
+    <script src="./jasmine-3.6.0/boot.js"></script>
+    <script>
+      // beforeEach - run before each "it" callback
+      describe("Arrays", function () {
+        var arr;
+
+        beforeEach(function () {
+          arr = [1, 3, 5];
+        });
+
+        it("adds elements to an array", function () {
+          arr.push(7);
+          expect(arr).toEqual([1, 3, 5, 7]);
+        });
+
+        it("returns the new length of the array", function () {
+          expect(arr.push(7)).toBe(4);
+        });
+
+        it("add anything into the array", function () {
+          expect(arr.push({})).toBe(4);
+        });
+      });
+
+      // afterEach - run after each "it" callback, useful for teardown and commonly used when
+      // testing with databases to ensure consistent data
+      describe("Counting", function () {
+        var count = 0;
+
+        beforeEach(function () {
+          count++;
+        });
+
+        afterEach(function () {
+          count = 0;
+        });
+
+        it("has a counter that increment", function () {
+          expect(count).toBe(1);
+        });
+
+        it("gets reset", function () {
+          expect(count).toBe(1);
+        });
+      });
+
+      // nesting describe blocks for better organization
+      describe("More arrays", function () {
+        var arr;
+
+        beforeEach(function () {
+          arr = [1, 3, 5];
+        });
+
+        describe("#unshift", function () {
+          it("add an element to the beginning of an array", function () {
+            arr.unshift(17);
+            expect(arr[0]).toBe(17);
+          });
+
+          it("returns the new length", function () {
+            expect(arr.unshift(1000)).toBe(4);
+          });
+        });
+
+        describe("#push", function () {
+          it("adds an element to the end of an array", function () {
+            arr.push(17);
+            expect(arr[3]).toBe(17);
+          });
+
+          it("returns the new length", function () {
+            expect(arr.push(1000)).toBe(4);
+          });
+        });
+      });
+
+      // pending tests - bookmarks to write the tests later
+      describe("Pending specs", function () {
+        xit("can start with an 'xit'", function () {
+          expect(true).toBe(false);
+        });
+
+        it("is a pending test if there is no callback fn");
+
+        it("is pending if the pending function is invoked inside the callback", function () {
+          expect(2).toBe(4);
+          pending();
+        });
+      });
+    </script>
+  </body>
+</html>

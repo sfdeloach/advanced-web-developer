@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spies</title>
+    <link
+      rel="shortcut icon"
+      href="./jasmine-3.6.0/jasmine_favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./jasmine-3.6.0/jasmine.css" />
+  </head>
+  <body>
+    <script src="./jasmine-3.6.0/jasmine.js"></script>
+    <script src="./jasmine-3.6.0/jasmine-html.js"></script>
+    <script src="./jasmine-3.6.0/boot.js"></script>
+    <script>
+      var myObject = {
+        add: function (a, b = 0, c = 0) {
+          console.log("I am the add function");
+          return a + b + c;
+        },
+        smartAdd: function () {
+          console.log("I am the improved add function");
+          var args = [...arguments];
+          var sum = 0;
+          args.forEach(function (element) {
+            sum += element;
+          });
+          return sum;
+        },
+      };
+    </script>
+    <script>
+      // Spies - fake the behavior of expensive functions, for example, calls to a database
+      // They are only trying to mock the behavior of a function, their usefulness becomes more
+      // apparent with larger code bases
+      describe("Add spy", function () {
+        var addSpy1, addSpy2, result1, result2;
+
+        // notice addSpy1 and addSpy2 are invoked, only the message from addSpy2 is visible on the
+        // console
+        beforeEach(function () {
+          addSpy1 = spyOn(myObject, "add");
+          addSpy2 = spyOn(myObject, "smartAdd").and.callThrough();
+          result1 = addSpy1(1, 2, 3);
+          result2 = addSpy2(1, 2, 3);
+        });
+
+        it("should be called", function () {
+          expect(addSpy1).toHaveBeenCalled();
+        });
+
+        // the myObject.add() function still has not been called, this is only testing that specific
+        // parameters have been entered
+        it("should be called with parameters", function () {
+          expect(addSpy1).toHaveBeenCalledWith(1, 2, 3);
+        });
+
+        // the count() spec below passes, interestingly though, the logging message appears three
+        // times in the console
+        it("can have a return value tested", function () {
+          expect(addSpy2.calls.any()).toBe(true);
+          expect(addSpy2.calls.count()).toBe(1);
+          expect(result2).toBe(6);
+
+          // offers a peak at what's going on, spyOn returns a function and only result2 holds a
+          // value
+          console.log("addSpy1: " + addSpy1);
+          console.log("addSpy2: " + addSpy2);
+          console.log("result1: " + result1);
+          console.log("result2: " + result2);
+        });
+      });
+    </script>
+  </body>
+</html>

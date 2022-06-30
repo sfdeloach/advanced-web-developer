@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattern Matching</title>
+    <link
+      rel="shortcut icon"
+      href="./jasmine-3.6.0/jasmine_favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./jasmine-3.6.0/jasmine.css" />
+  </head>
+  <body>
+    <script src="./jasmine-3.6.0/jasmine.js"></script>
+    <script src="./jasmine-3.6.0/jasmine-html.js"></script>
+    <script src="./jasmine-3.6.0/boot.js"></script>
+    <script>
+      var array1 = [1, 2, 3];
+      var array2 = [1, 2, 3];
+      var array3 = array1;
+
+      var object1 = { a: "a", b: "b" };
+      var object2 = { a: "a", b: "b" };
+      var object3 = object1;
+
+      describe("Jasmine Matchers", function () {
+        it("allows for === and deep equality", function () {
+          
+          // shallow comparison, only same references in memory return true, same as ===
+          expect(1 + 1).toBe(2);
+          expect(array1).not.toBe(array2);
+          expect(array1).toBe(array3);
+          expect(object1).not.toBe(object2);
+          expect(object1).toBe(object3);
+
+          // deep comparison, different objects references 
+          expect(array1).toEqual(array2);
+          expect(array1).toEqual(array3);
+          expect(object1).toEqual(object2);
+          expect(object1).toEqual(object3);
+        });
+
+        it("allows for easy precision checking", function () {
+          expect(3.1415).toBeCloseTo(3.14, 2);
+        });
+
+        it("allows for easy truthy / falsey checking", function () {
+          expect(0).toBeFalsy();
+          expect([]).toBeTruthy();
+        });
+
+        it("allows for easy type checking", function () {
+          expect([]).toEqual(jasmine.any(Array));
+          expect(function () {}).toEqual(jasmine.any(Function));
+        });
+
+        it("allows for checking contents of an object", function () {
+          expect([1, 2, 3]).toContain(1);
+          expect({ name: "Elie", job: "Instructor" }).toEqual(
+            jasmine.objectContaining({ name: "Elie" })
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

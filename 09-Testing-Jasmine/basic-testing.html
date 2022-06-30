@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jasmine - First Steps</title>
+    <link
+      rel="shortcut icon"
+      href="./jasmine-3.6.0/jasmine_favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./jasmine-3.6.0/jasmine.css" />
+  </head>
+  <body>
+    <script src="./jasmine-3.6.0/jasmine.js"></script>
+    <script src="./jasmine-3.6.0/jasmine-html.js"></script>
+    <script src="./jasmine-3.6.0/boot.js"></script>
+    <script>
+      var earth = { isRound: true, numberFromSun: 3 };
+      describe("Earth", function () {
+        it("is round", function () {
+          expect(earth.isRound).toBe(true);
+        });
+        it("is the 3rd planet from the sun", function () {
+          expect(earth.numberFromSun).toBe(3);
+        });
+      });
+    </script>
+  </body>
+</html>

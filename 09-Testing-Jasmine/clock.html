@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock - How to test async code</title>
+    <link
+      rel="shortcut icon"
+      href="./jasmine-3.6.0/jasmine_favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./jasmine-3.6.0/jasmine.css" />
+  </head>
+  <body>
+    <script src="./jasmine-3.6.0/jasmine.js"></script>
+    <script src="./jasmine-3.6.0/jasmine-html.js"></script>
+    <script src="./jasmine-3.6.0/boot.js"></script>
+    <script>
+      function getUserInfo(username) {
+        return fetch("https://api.github.com/users/" + username)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            return data;
+          });
+      }
+    </script>
+    <script>
+      describe("a simple setTimeout", function () {
+        var sample;
+
+        beforeEach(function () {
+          sample = jasmine.createSpy("sampleFunction");
+          jasmine.clock().install();
+        });
+
+        afterEach(function () {
+          jasmine.clock().uninstall();
+        });
+
+        it("is only invoked after 1000 milliseconds", function () {
+          setTimeout(function () {
+            sample();
+          }, 1000);
+          jasmine.clock().tick(999);
+          expect(sample).not.toHaveBeenCalled();
+          jasmine.clock().tick(1);
+          expect(sample).toHaveBeenCalled();
+        });
+      });
+
+      describe("a simple setInterval", function () {
+        var sample;
+
+        beforeEach(function () {
+          sample = jasmine.createSpy("sampleFunction");
+          jasmine.clock().install();
+        });
+
+        afterEach(function () {
+          jasmine.clock().uninstall();
+        });
+
+        it("checks to see the number of times the function has been called", function () {
+          setInterval(function () {
+            sample();
+          }, 10);
+          jasmine.clock().tick(9);
+          expect(sample.calls.count()).toBe(0);
+          jasmine.clock().tick(10);
+          expect(sample.calls.count()).toBe(1);
+          jasmine.clock().tick(1);
+          expect(sample.calls.count()).toBe(2);
+        });
+      });
+
+      // notice the parameter "done" for the "it" callback, this is necessary when testing async
+      // AJAX code
+      describe("API call to GitHub", function () {
+        it("returns the correct name for the user", function (done) {
+          getUserInfo("sfdeloach").then(function (data) {
+            expect(data.name).toBe("Steven DeLoach");
+            done();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
