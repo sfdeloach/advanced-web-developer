@@ -12,13 +12,21 @@ Array.prototype.myForEach = myForEach;
 
 // calling the new custom function as a method
 var a = [3, 23, 5].myForEach(function (value, index, array) {
-  console.log("value: " + value, "index: " + index, "array: " + JSON.stringify(array));
+  console.log(
+    "value: " + value,
+    "index: " + index,
+    "array: " + JSON.stringify(array)
+  );
 });
 
 // calling the new custom function as a function
 var b = myForEach(
   function (value, index, array) {
-    console.log("value: " + value, "index: " + index, "array: " + JSON.stringify(array));
+    console.log(
+      "value: " + value,
+      "index: " + index,
+      "array: " + JSON.stringify(array)
+    );
   },
   [3, 24, 6]
 );
@@ -58,8 +66,8 @@ function doubleValues(arr) {
   return result;
 }
 
-console.log(doubleValues([1, 2, 3])); // [2,4,6]
-console.log(doubleValues([5, 1, 2, 3, 10])); // [10,2,4,6,20]
+// console.log(doubleValues([1, 2, 3])); // [2,4,6]
+// console.log(doubleValues([5, 1, 2, 3, 10])); // [10,2,4,6,20]
 
 /*
 Write a function called onlyEvenValues which accepts an array and returns a new array with only the
@@ -72,14 +80,14 @@ Examples:
 */
 function onlyEvenValues(arr) {
   var result = [];
-  myForEach(function (value) {
-    if (value % 2 == 0) result.push(value);
+  myForEach(function (val) {
+    if (!(val % 2)) result.push(val);
   }, arr);
   return result;
 }
 
-console.log(onlyEvenValues([1, 2, 3])); // [2]
-console.log(onlyEvenValues([5, 1, 2, 3, 10])); // [2,10]
+// console.log(onlyEvenValues([1, 2, 3])); // [2]
+// console.log(onlyEvenValues([5, 1, 2, 3, 10])); // [2,10]
 
 /*
 Write a function called showFirstAndLast which accepts an array of strings and returns a new array
@@ -92,14 +100,14 @@ Examples:
 */
 function showFirstAndLast(arr) {
   var result = [];
-  myForEach(function (value) {
-    result.push(value[0] + value[value.length - 1]);
+  myForEach(function (val) {
+    result.push(val[0] + val[val.length - 1]);
   }, arr);
   return result;
 }
 
-console.log(showFirstAndLast(["colt", "matt", "tim", "udemy"])); // ["ct", "mt", "tm", "uy"]
-console.log(showFirstAndLast(["hi", "goodbye", "smile"])); // ['hi', 'ge', 'se']
+// console.log(showFirstAndLast(["colt", "matt", "tim", "udemy"])); // ["ct", "mt", "tm", "uy"]
+// console.log(showFirstAndLast(["hi", "goodbye", "smile"])); // ['hi', 'ge', 'se']
 
 /*
 Write a function called addKeyAndValue which accepts an array of objects, a key, and a value and
@@ -116,20 +124,19 @@ Examples:
 function addKeyAndValue(arr, key, value) {
   var result = [];
   myForEach(function (val) {
-    var newObj = { name: val.name };
-    newObj[key] = value;
-    result.push(newObj);
+    val[key] = value;
+    result.push(val);
   }, arr);
   return result;
 }
 
-console.log(
-  addKeyAndValue(
-    [{ name: "Elie" }, { name: "Tim" }, { name: "Matt" }, { name: "Colt" }],
-    "title",
-    "instructor"
-  )
-);
+// console.log(
+//   addKeyAndValue(
+//     [{ name: "Elie" }, { name: "Tim" }, { name: "Matt" }, { name: "Colt" }],
+//     "title",
+//     "instructor"
+//   )
+// );
 
 /*
 Write a function called vowelCount which accepts a string and returns an object with the keys as the
@@ -143,4 +150,20 @@ Examples:
     vowelCount('hmmm') // {};
     vowelCount('I Am awesome and so are you') // {i: 1, a: 4, e: 3, o: 3, u: 1};
 */
-function vowelCount(str) {}
+function vowelCount(str) {
+  var arr = str.toLowerCase().split("");
+  var obj = {};
+  var vowels = "aeiou";
+
+  arr.forEach(function (letter) {
+    if (vowels.indexOf(letter) !== -1) obj[letter] = ++obj[letter] || 1;
+  });
+  
+  return obj;
+}
+
+console.log(vowelCount("Elie")); // {e:2,i:1};
+console.log(vowelCount("Tim")); // {i:1};
+console.log(vowelCount("Matt")); // {a:1})
+console.log(vowelCount("hmmm")); // {};
+console.log(vowelCount("I Am awesome and so are you")); // {i: 1, a: 4, e: 3, o: 3, u: 1};
