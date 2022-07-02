@@ -11,11 +11,11 @@
 
 var numbers = [4, 1, 9, 4, 0, -3, 2, -12, 7, -2];
 var family = [
-  { name: "Steven", sex: "M" },
-  { name: "Stephanie", sex: "F" },
-  { name: "Lillian", sex: "F" },
-  { name: "Cookie", sex: "F" },
-  { name: "Mayor", sex: "M" },
+  { name: 'Steven', sex: 'M' },
+  { name: 'Stephanie', sex: 'F' },
+  { name: 'Lillian', sex: 'F' },
+  { name: 'Cookie', sex: 'F' },
+  { name: 'Mayor', sex: 'M' }
 ];
 
 var negativeNumbers = numbers.filter(function (value) {
@@ -23,7 +23,7 @@ var negativeNumbers = numbers.filter(function (value) {
 });
 
 var girlsOnly = family.filter(function (value) {
-  return value.sex === "F";
+  return value.sex === 'F';
 });
 
 console.log(negativeNumbers); // [-3, -12, -2]
@@ -47,7 +47,7 @@ console.log(
 
 console.log(
   myFilter(family, function (value) {
-    return value.sex === "F";
+    return value.sex === 'F';
   })
 );
 
@@ -72,12 +72,12 @@ function filterByValue(arr, key) {
 console.log(
   filterByValue(
     [
-      { first: "Elie", last: "Schoppik" },
-      { first: "Tim", last: "Garcia", isCatOwner: true },
-      { first: "Matt", last: "Lane" },
-      { first: "Colt", last: "Steele", isCatOwner: true },
+      { first: 'Elie', last: 'Schoppik' },
+      { first: 'Tim', last: 'Garcia', isCatOwner: true },
+      { first: 'Matt', last: 'Lane' },
+      { first: 'Colt', last: 'Steele', isCatOwner: true }
     ],
-    "isCatOwner"
+    'isCatOwner'
   )
 );
 
@@ -117,12 +117,12 @@ function findInObj(arr, key, searchValue) {
 console.log(
   findInObj(
     [
-      { first: "Elie", last: "Schoppik" },
-      { first: "Tim", last: "Garcia", isCatOwner: true },
-      { first: "Matt", last: "Lane" },
-      { first: "Colt", last: "Steele", isCatOwner: true },
+      { first: 'Elie', last: 'Schoppik' },
+      { first: 'Tim', last: 'Garcia', isCatOwner: true },
+      { first: 'Matt', last: 'Lane' },
+      { first: 'Colt', last: 'Steele', isCatOwner: true }
     ],
-    "isCatOwner",
+    'isCatOwner',
     true
   )
 );
@@ -137,14 +137,38 @@ Examples: removeVowels('Elie')   // ('l')
           removeVowels('ZZZZZZ') // ('zzzzzz')
 */
 
-function removeVowels(str) {}
+function removeVowels(str) {
+  return str
+    .toLowerCase()
+    .split('')
+    .filter(function (letter) {
+      return 'aeiou'.indexOf(letter) === -1;
+    })
+    .join('');
+}
+
+console.log(removeVowels('Elie')); // ('l')
+console.log(removeVowels('TIM')); // ('tm')
+console.log(removeVowels('ZZZZZZ')); // ('zzzzzz')
 
 /*
 Write a function called doubleOddNumbers which accepts an array and returns a new array with all of
-the odd numbers doubled (HINT - you can use map and fitler to double and then filter the odd
+the odd numbers doubled (HINT - you can use map and filter to double and then filter the odd
 numbers).
 
-Examples: doubleOddNumbers([1,2,3,4,5]) // [2,6,10] doubleOddNumbers([4,4,4,4,4]) // []
+Examples: doubleOddNumbers([1,2,3,4,5]) // [2,6,10]
+          doubleOddNumbers([4,4,4,4,4]) // []
 */
 
-function doubleOddNumbers(arr) {}
+function doubleOddNumbers(arr) {
+  return arr
+    .filter(function (value) {
+      return value % 2;
+    })
+    .map(function (value) {
+      return value * 2;
+    });
+}
+
+console.log(doubleOddNumbers([1, 2, 3, 4, 5])); // [2,6,10]
+console.log(doubleOddNumbers([4, 4, 4, 4, 4])); // []
