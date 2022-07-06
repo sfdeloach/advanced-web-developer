@@ -30,10 +30,6 @@ function sumEvenArguments() {
   }, 0);
 }
 
-console.log(sumEvenArguments(1, 2, 3, 4)); // 6
-console.log(sumEvenArguments(1, 2, 6)); // 8
-console.log(sumEvenArguments(1, 2)); // 2
-
 /* 
 Write a function called invokeMax which accepts a function and a maximum amount. invokeMax should
 return a function that when called increments a counter. If the counter is greater than the maximum
@@ -53,7 +49,23 @@ Examples:
 
 */
 
-function invokeMax(fn, num) {}
+/**
+ * This solution uses closure on the num parameter to keep track of how many times the function is
+ * called. The apply method is then called on the provided fn function and is passed an empty object
+ * for its thisArg. It does not matter in this case what the context is since fn is assumed to have
+ * no use for an object's properties. The arguments on the returned function are converted into an
+ * array and passed as the second argument. The apply method is used since the second parameter is
+ * an array.
+ */
+function invokeMax(fn, num) {
+  return function () {
+    num--;
+    if (num < 0) {
+      return "Maxed Out!";
+    }
+    return fn.apply(this, [].slice.call(arguments)); // 'this' in this context does not matter
+  };
+}
 
 /* 
 Write a function called once which accepts two parameters, a function and a value for the keyword
@@ -83,16 +95,24 @@ Examples:
 
 */
 
-function once(fn, thisArg) {}
+function once(fn, thisArg) {
+  var invokable = true;
+  return function () {
+    if (invokable) {
+      invokable = false;
+      return fn.apply(thisArg, [].slice.call(arguments));
+    }
+  };
+}
 
 // BONUSES!
 
 /* 
 Write a function called bind which accepts a function and a value for the keyword this. Bind should
-return a new function that when invoked, will invoke the function passed to bind with the correct
-value of the keyword this. HINT - if you pass more than two parameters to bind, those parameters
-should be included as parameters to the inner function when it is invoked. You will have to make use
-of closure!
+return a new function that when invoked, and will invoke the function passed to bind with the
+correct value of the keyword this. HINT - if you pass more than two parameters to bind, those
+parameters should be included as parameters to the inner function when it is invoked. You will have
+to make use of closure!
 
 Examples:
 
@@ -123,7 +143,16 @@ Examples:
 
 */
 
-function bind(fn, thisArg) {}
+/**
+ * The key here was to combine the arguments array from the bind function and the function 'fn' that
+ * is passed to it. The first two arguments in bind are removed before concatenation occurs.
+ */
+function bind(fn, thisArg) {
+  var args = [].slice.call(arguments).slice(2); // return an array of args from 2 to n
+  return function () {
+    return fn.apply(thisArg, args.concat([].slice.call(arguments)));
+  };
+}
 
 /* 
 Write a function called flip which accepts a function and a value for the keyword this. Flip should
@@ -137,9 +166,6 @@ to that function which are then reversed. HINT - you will need to use the .lengt
 functions to figure out the correct amount of arguments. For example:
 
 flip(subtractFourNumbers,this,11,12,13,14,15)(1,2,3,4,5,6,7,8,9,10) 
-
-
-
 
 Examples:
 
@@ -172,4 +198,28 @@ Examples:
 
 */
 
-function flip(fn, thisArg) {}
+function flip(fn, thisArg) {
+  var outerArgs = [].slice.call(arguments).slice(2);
+  return function () {
+    var innerArgs = [].slice.call(arguments);
+    var combinedArgs = outerArgs.concat(innerArgs).slice(length);
+    var reversedArgs = [];
+    combinedArgs.forEach(function (val) {
+      reversedArgs.unshift(val);
+    });
+    return fn.apply(thisArg, reversedArgs);
+  };
+}
+
+function subtractFourNumbers(a, b, c, d) {
+  return a - b - c - d;
+}
+
+console.log(flip(subtractFourNumbers, this, 1)(2, 3, 4)); // -2
+console.log(flip(subtractFourNumbers, this, 1, 2)(3, 4)); // -2
+console.log(flip(subtractFourNumbers, this, 1, 2, 3)(4)); // -2
+console.log(flip(subtractFourNumbers, this, 1, 2, 3, 4)()); // -2
+console.log(flip(subtractFourNumbers, this)(1, 2, 3, 4)); // -2
+console.log(flip(subtractFourNumbers, this, 1, 2, 3)(4, 5, 6, 7)); // -2
+console.log(flip(subtractFourNumbers, this)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // -2
+console.log(flip(subtractFourNumbers, this, 11, 12, 13, 14, 15)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // -22
