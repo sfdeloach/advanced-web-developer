@@ -61,9 +61,9 @@ function invokeMax(fn, num) {
   return function () {
     num--;
     if (num < 0) {
-      return "Maxed Out!";
+      return 'Maxed Out!';
     }
-    return fn.apply(this, [].slice.call(arguments)); // 'this' in this context does not matter
+    return fn.apply(this, arguments); // 'this' in this context does not matter, arguments does not need to be converted to an array
   };
 }
 
@@ -100,7 +100,7 @@ function once(fn, thisArg) {
   return function () {
     if (invokable) {
       invokable = false;
-      return fn.apply(thisArg, [].slice.call(arguments));
+      return fn.apply(thisArg, arguments);
     }
   };
 }
@@ -148,9 +148,11 @@ Examples:
  * is passed to it. The first two arguments in bind are removed before concatenation occurs.
  */
 function bind(fn, thisArg) {
-  var args = [].slice.call(arguments).slice(2); // return an array of args from 2 to n
+  var outerArgs = [].slice.call(arguments, 2); // return an array of args from 2 to n
   return function () {
-    return fn.apply(thisArg, args.concat([].slice.call(arguments)));
+    var innerArgs = [].slice.call(arguments);
+    var allArgs = outerArgs.concat(innerArgs);
+    return fn.apply(thisArg, allArgs);
   };
 }
 
@@ -199,27 +201,10 @@ Examples:
 */
 
 function flip(fn, thisArg) {
-  var outerArgs = [].slice.call(arguments).slice(2);
+  var outerArgs = [].slice.call(arguments, 2);
   return function () {
     var innerArgs = [].slice.call(arguments);
-    var combinedArgs = outerArgs.concat(innerArgs).slice(length);
-    var reversedArgs = [];
-    combinedArgs.forEach(function (val) {
-      reversedArgs.unshift(val);
-    });
-    return fn.apply(thisArg, reversedArgs);
+    var allArgs = outerArgs.concat(innerArgs).slice(0, fn.length);
+    return fn.apply(thisArg, allArgs.reverse());
   };
 }
-
-function subtractFourNumbers(a, b, c, d) {
-  return a - b - c - d;
-}
-
-console.log(flip(subtractFourNumbers, this, 1)(2, 3, 4)); // -2
-console.log(flip(subtractFourNumbers, this, 1, 2)(3, 4)); // -2
-console.log(flip(subtractFourNumbers, this, 1, 2, 3)(4)); // -2
-console.log(flip(subtractFourNumbers, this, 1, 2, 3, 4)()); // -2
-console.log(flip(subtractFourNumbers, this)(1, 2, 3, 4)); // -2
-console.log(flip(subtractFourNumbers, this, 1, 2, 3)(4, 5, 6, 7)); // -2
-console.log(flip(subtractFourNumbers, this)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // -2
-console.log(flip(subtractFourNumbers, this, 11, 12, 13, 14, 15)(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // -22

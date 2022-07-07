@@ -12,7 +12,8 @@
  *   - object/implicit - when 'this' is defined (created by the definition of a function) inside of
  *     a declared object
  *   - explicit - using call, bind, and apply to define the context of 'this'
- *   - new
+ *   - new - used when invoking functions, changes 'this' from the global object to an instance
+ *     object
  */
 
 // Global object (window in a browser, global in node) /////////////////////////////////////////////
@@ -171,3 +172,15 @@ console.log(steph.sayHello()); // hello steph
 steph.waitThenHello().then(function (message) {
   console.log(message); // (waits 2 seconds) hi steph
 });
+
+/// new ////////////////////////////////////////////////////////////////////////////////////////////
+
+function Car(year, make, model) {
+  this.year = year;
+  this.make = make;
+  this.model = model;
+}
+
+var myFirstCar = new Car(1985, 'Honda', 'Prelude');
+
+console.log(myFirstCar.year, myFirstCar.make, myFirstCar.model);
