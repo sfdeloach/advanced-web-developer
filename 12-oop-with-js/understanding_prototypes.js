@@ -59,12 +59,16 @@ console.log(steven.getHeight()); // 6.5
 
 // Refactor Challenge from lesson 141 //////////////////////////////////////////////////////////////
 
+// Keep properties within the constructor function definition to prevent static data binding
+
 function Vehicle(make, model, year) {
   this.make = make;
   this.model = model;
   this.year = year;
   this.isRunning = false;
 }
+
+// Add methods to the prototype to reduce overhead
 
 Vehicle.prototype.turnOn = function () {
   this.isRunning = true;
