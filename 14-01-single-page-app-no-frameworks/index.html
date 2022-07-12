@@ -4,9 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>No Framework SPA</title>
+    <link rel="stylesheet" href="/public/style.css" />
+    <title>No Frameworks SPA</title>
   </head>
   <body>
-    <h1>Goodbye Frameworks</h1>
+    <div class="container">
+      <h1>Assignment Tracker</h1>
+      <h2>keeping track of assignments</h2>
+      <div class="input">
+        <input class="txt" type="text" id="name" placeholder="enter name" />
+        <input class="txt" type="text" id="assignment" placeholder="enter assignment" />
+        <input class="btn" type="button" value="add" />
+      </div>
+      <ul class="assignment-list"></ul>
+    </div>
+    <script src="/public/script.js"></script>
   </body>
 </html>
