@@ -62,7 +62,8 @@ http
           body.push(chunk);
         })
         .on("end", function () {
-          body = toJSON(Buffer.concat(body).toString());
+          body = JSON.parse(Buffer.concat(body).toString());
+          body.id = randomUUID();
           fileStore.push(body);
           response.end(JSON.stringify(body));
         });
@@ -76,16 +77,3 @@ http
   .listen(port, hostname, function () {
     console.log("server running on port", port);
   });
-
-// helpers
-function toJSON(data) {
-  data = data.split("&");
-  data = data.reduce(function (prev, curr) {
-    var propKey = curr.split("=");
-    prev[propKey[0]] = propKey[1];
-    return prev;
-  }, {});
-  data.id = randomUUID();
-
-  return data;
-}
