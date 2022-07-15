@@ -5,15 +5,16 @@ var crypto = require("crypto"),
   http = require("http"),
   hostname = "localhost",
   port = 3000,
-  fileStore = [];
+  localStore = [],
+  fileStore = "./store/store.json";
 
 // connect to file store
-fs.readFile("./store/index.txt", "utf8", function (err, data) {
+fs.readFile(fileStore, "utf8", function (err, data) {
   if (err) {
     console.error(err);
     return;
   }
-  fileStore = JSON.parse(data);
+  localStore = JSON.parse(data);
   console.log("data store loaded");
 });
 
@@ -51,7 +52,7 @@ http
       console.log("GET", url);
       response.statusCode = 200;
       response.setHeader("Content-Type", "text/json");
-      response.end(JSON.stringify(fileStore));
+      response.end(JSON.stringify(localStore));
       // POST routes
     } else if (request.method === "POST" && url === "/api") {
       console.log("POST", url);
@@ -64,8 +65,15 @@ http
         .on("end", function () {
           body = JSON.parse(Buffer.concat(body).toString());
           body.id = randomUUID();
-          fileStore.push(body);
-          response.end(JSON.stringify(body));
+          localStore.push(body);
+          // update store on file
+          fs.writeFile(fileStore, JSON.stringify(localStore), function (err) {
+            if (err) {
+              console.error(err);
+            } else {
+              response.end(JSON.stringify(body));
+            }
+          });
         });
       // 404 route
     } else {
