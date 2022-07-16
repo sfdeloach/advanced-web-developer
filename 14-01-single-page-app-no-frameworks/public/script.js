@@ -1,57 +1,101 @@
 var state = Object.create(null);
-var assignmentList = document.querySelector(".assignment-list");
-var addBtn = document.querySelector(".btn");
-var nameFld = document.querySelector("#name");
-var assignmentFld = document.querySelector("#assignment");
+var assignments = document.querySelector('.assignments');
+var addBtn = document.querySelector('.btn');
+var nameFld = document.querySelector('#name');
+var assignmentFld = document.querySelector('#assignment');
 
 function displayHobbies() {
-  fetch("/api")
+  fetch('/api')
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      state.assignmentList = data; // update state
-      state.assignmentList.forEach(function (val) {
-        var item = document.createElement("li");
-        item.innerHTML = val.name + " - " + val.assignment;
-        item.addEventListener("click", addListener(item));
-        assignmentList.appendChild(item);
+      // update state
+      state.assignments = data;
+
+      // update view
+      state.assignments.forEach(function (assignment) {
+        addTableRow(assignment);
       });
     });
 }
 
-function addListener(item) {
+// creates a new table row and inserts into the DOM
+function addTableRow(assignment) {
+  var tr = document.createElement('tr');
+  var tdName = document.createElement('td');
+  var tdAssignment = document.createElement('td');
+
+  tr.id = assignment.id;
+  tdName.innerHTML = assignment.name;
+  tdAssignment.innerHTML = assignment.assignment;
+
+  tr.appendChild(tdName);
+  tr.appendChild(tdAssignment);
+  tr.addEventListener('click', addListener(assignment.id));
+
+  assignments.appendChild(tr);
+}
+
+// used for delete functionality on assignment items
+function addListener(id) {
   return function () {
-    console.log(item.id);
+    fetch('/api/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: id
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        // update view
+        document.getElementById(id).remove();
+
+        // update state
+        var index = state.assignments
+          .map(function (assignment) {
+            return assignment.id;
+          })
+          .indexOf(id);
+        state.assignments.splice(index, 1);
+      })
+      .catch(function (error) {
+        console.error('Error:', error);
+      });
   };
 }
 
-addBtn.addEventListener("click", function () {
-  const data = JSON.stringify({ name: nameFld.value, assignment: assignmentFld.value });
+// creates new assignment, updates view, frontend state, and the backend store
+addBtn.addEventListener('click', function () {
+  var data = JSON.stringify({ name: nameFld.value, assignment: assignmentFld.value });
 
-  fetch("/api", {
-    method: "POST",
+  fetch('/api', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json'
     },
-    body: data,
+    body: data
   })
     .then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-      var item = document.createElement("li");
-      item.innerHTML = data.name + " - " + data.assignment;
-      item.id = data.id;
-      item.addEventListener("click", addListener(item)); // add listener
-      assignmentList.appendChild(item); // display new assignment
-      state.assignmentList.push(data); // update state
-      nameFld.value = ""; // clear input fields
-      assignmentFld.value = "";
+    .then(function (assignment) {
+      // update view
+      addTableRow(assignment);
+      nameFld.value = '';
+      assignmentFld.value = '';
+      nameFld.focus();
+
+      // update state
+      state.assignments.push(assignment);
     })
     .catch(function (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     });
 });
 
 displayHobbies();
+nameFld.focus();
