@@ -1,0 +1,65 @@
+body {
+  background-color: black;
+  color: lime;
+  font-family: monospace;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+button {
+  margin-top: 32px;
+  background-color: black;
+  color: lime;
+  border: 2px solid lime;
+  border-radius: 4px;
+  font-size: 32px;
+  font-family: monospace;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: lime;
+  color: black;
+}
+
+button:active {
+  background-color: black;
+  color: lime;
+}
+
+#words {
+  margin-top: 24px;
+}
+
+#words p.unselected {
+  padding: 6px;
+  font-size: 12px;
+  margin: 0px;
+  text-align: center;
+}
+
+#words p.unselected:hover {
+  color: yellow;
+  font-size: 18px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#words p.incorrect {
+  color: lightgray;
+}
+
+#status {
+  margin-top: 24px;
+  text-align: center;
+}

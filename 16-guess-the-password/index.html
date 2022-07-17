@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Guess the Password</title>
+  </head>
+  <body>
+    <div class="show" id="start-page">
+      <div class="banner">
+        <pre>
+         _____                        _   _            _____                                    _ 
+        / ____|                      | | | |          |  __ \                                  | |
+        | |  __ _   _  ___  ___ ___  | |_| |__   ___  | |__) |_ _ ___ _____      _____  _ __ __| |
+        | | |_ | | | |/ _ \/ __/ __| | __| '_ \ / _ \ |  ___/ _` / __/ __\ \ /\ / / _ \| '__/ _` |
+        | |__| | |_| |  __/\__ \__ \ | |_| | | |  __/ | |  | (_| \__ \__ \\ V  V / (_) | | | (_| |
+        \_____|\__,_|\___| |___/___/  \__|_| |_|\___| |_|   \__,_|___/___/ \_/\_/ \___/|_|  \__,_|
+    </pre
+        >
+      </div>
+      <div class="instructions">
+        <p>Given a list of potential passwords, try to guess the correct one.</p>
+        <p>If your're wrong, we'll tell you how many letters are correct.</p>
+      </div>
+      <div id="start-btn">
+        <button>Start</button>
+      </div>
+    </div>
+    <div class="hide" id="game-page">
+      <div id="words"></div>
+      <div id="status">
+        <p>Click on a word to make a guess.</p>
+        <p>Guesses remaining: <span id="guesses"></span>.</p>
+      </div>
+      <div id="return-btn">
+        <button>Return</button>
+      </div>
+    </div>
+    <script src="WordGenerator.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
