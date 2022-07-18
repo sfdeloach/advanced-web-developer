@@ -104,20 +104,41 @@ function WordGenerator(quantity) {
 }
 
 WordGenerator.prototype.getWords = function (quantity) {
-  const arr = [];
+  this.words = [];
   let counter = quantity;
 
   while (counter > 0) {
     const word = this.wordBank[this.random()];
-    if (arr.indexOf(word) === -1) {
-      arr.push(word);
+    if (this.words.indexOf(word) === -1) {
+      this.words.push(word);
       --counter;
     }
   }
 
-  return { answer: arr[this.random(quantity)], words: arr };
+  this.answer = this.words[this.random(quantity)];
 };
 
 WordGenerator.prototype.random = function (range = 100) {
   return Math.floor(Math.random() * range);
+};
+
+WordGenerator.prototype.getLetters = function (word) {
+  const guess = this.letterMap(word);
+  const answer = this.letterMap();
+  let matchingLetters = 0;
+
+  for (const letter in guess) {
+    if (letter in answer) {
+      matchingLetters = matchingLetters + Math.min(guess[letter], answer[letter]);
+    }
+  }
+
+  return matchingLetters;
+};
+
+WordGenerator.prototype.letterMap = function (word = this.answer) {
+  return word.split('').reduce((acc, curr) => {
+    acc[curr] = ++acc[curr] || 1;
+    return acc;
+  }, {});
 };
