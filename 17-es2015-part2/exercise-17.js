@@ -12,7 +12,10 @@ class MessageBoard {
     m.id // 1
     */
 
-  constructor() {}
+  constructor() {
+    this.messages = new Map();
+    this.id = 1;
+  }
 
   //  Add a method called addMessage which accepts a string. The function should add a key and
   //  value to the messages map with a key of whatever the value of this.id is and a value of
@@ -28,7 +31,10 @@ class MessageBoard {
     m.addMessage('awesome!').addMessage('nice!').addMessage('cool!') 
     */
 
-  addMessage() {}
+  addMessage(msg) {
+    this.messages.set(this.id++, msg);
+    return this;
+  }
 
   // Add a method called findMessageById which accepts a number and returns the message in the
   // messages map with the same key as the number passed to the function. If the key is not found
@@ -46,7 +52,9 @@ class MessageBoard {
     m.findMessageById() // undefined
     */
 
-  findMessageById() {}
+  findMessageById(id) {
+    return this.messages.get(id);
+  }
 
   // Add a method called findMessageByValue which accepts a string and returns the message in the
   // messages map with the same value as the string passed to the function. If the value is not
@@ -64,7 +72,11 @@ class MessageBoard {
     m.findMessageByValue() // undefined
     */
 
-  findMessageByValue() {}
+  findMessageByValue(val) {
+    for (const entry of this.messages.entries()) {
+      if (entry[1] === val) return val;
+    }
+  }
 
   // Add a method called removeMessage which accepts a number and removes a message in the
   // messages map with a key of the number passed to the function.
@@ -80,7 +92,9 @@ class MessageBoard {
     m.removeMessage() // m
     */
 
-  removeMessage() {}
+  removeMessage(id) {
+    this.messages.delete(id);
+  }
 
   // Add a method called numberOfMessages which returns the number of keys in the messages map
 
@@ -92,7 +106,9 @@ class MessageBoard {
     m.numberOfMessages() // 3
     */
 
-  numberOfMessages() {}
+  numberOfMessages() {
+    return this.messages.size;
+  }
 
   // Add a method called messagesToArray which returns an array of all of the values in the
   // messages map
@@ -105,7 +121,11 @@ class MessageBoard {
     m.messagesToArray() // ['hello!', 'hi!', 'whats up?'])
     */
 
-  messagesToArray() {}
+  messagesToArray() {
+    for (const value of this.messages.entries()) {
+      if (value[1] === val) return val;
+    }
+  }
 }
 
 /*
