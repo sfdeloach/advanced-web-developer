@@ -94,6 +94,7 @@ class MessageBoard {
 
   removeMessage(id) {
     this.messages.delete(id);
+    return this;
   }
 
   // Add a method called numberOfMessages which returns the number of keys in the messages map
@@ -122,9 +123,7 @@ class MessageBoard {
     */
 
   messagesToArray() {
-    for (const value of this.messages.entries()) {
-      if (value[1] === val) return val;
-    }
+    return Array.from(this.messages.values());
   }
 }
 
