@@ -25,10 +25,10 @@
         const promises = [];
 
         for (const user of githubUsers) {
-          promises.push($.getJSON('https://api.github.com/users/' + user));
+          promises.push($.getJSON("https://api.github.com/users/" + user));
         }
 
-        return Promise.all(promises).then(users => {
+        return Promise.all(promises).then((users) => {
           const mostFollowedUser = users.reduce(
             (previous, current) => {
               return previous.followers < current.followers ? current : previous;
@@ -39,7 +39,7 @@
         });
       }
 
-      getMostFollowers('elie', 'tigarcia', 'colt').then(function (data) {
+      getMostFollowers("elie", "tigarcia", "colt").then(function (data) {
         console.log(data); // "Colt has the most followers with 424"
       });
 
@@ -48,12 +48,19 @@
       // the number passed to the function. Your function should return a promise that when resolved
       // will console.log the name of the character.
 
+      // NOTE: no need to wrap the jQuery getJSON method in a promise, it already is a promise
+      // function starWarsStringOne(num) {
+      //   return new Promise((resolve, reject) => {
+      //     $.getJSON("https://swapi.dev/api/people/" + num)
+      //       .done((data) => resolve(data.name))
+      //       .fail((err) => reject(err));
+      //   });
+      // }
+
       function starWarsStringOne(num) {
-        return new Promise((resolve, reject) => {
-          $.getJSON('https://swapi.dev/api/people/' + num)
-            .done(data => resolve(data.name))
-            .fail(err => reject(err));
-        });
+        return $.getJSON("https://swapi.dev/api/people/" + num)
+          .then((data) => data.name) // using 'then' here, not 'done'
+          .fail((err) => err);
       }
 
       starWarsStringOne(1).then(function (data) {
@@ -65,13 +72,17 @@
       // console.log the name of the character and the film they are featured in
 
       function starWarsStringTwo(num) {
-        return new Promise((resolve, reject) => {
-          $.getJSON('https://swapi.dev/api/people/' + num)
-            .done(character => {
-              $.getJSON(character.films[0]).done(film => resolve(film));
-            })
-            .fail(err => reject(err));
-        });
+        return $.getJSON("https://swapi.dev/api/people/" + num)
+          .then((character) => {
+            return new Promise((resolve, reject) => {
+              $.getJSON(character.films[1]).then((film) => resolve({ character, film }));
+            });
+          })
+          .then(
+            ({ character, film }) =>
+              `${character.name} is featured in ${film.title}, directed by ${film.director}`
+          )
+          .fail((err) => err);
       }
 
       starWarsStringTwo(1).then(function (data) {
@@ -84,9 +95,22 @@
       // the name of the planet.
 
       function starWarsStringThree(num) {
-        return new Promise((resolve, reject) => {
-          resolve(num);
-        });
+        return $.getJSON("https://swapi.dev/api/people/" + num)
+          .then((character) => {
+            return new Promise((resolve, reject) => {
+              $.getJSON(character.films[1]).then((film) => resolve({ character, film }));
+            });
+          })
+          .then(({ character, film }) => {
+            return new Promise((resolve, reject) => {
+              $.getJSON(film.planets[0]).then((planet) => resolve({ character, film, planet }));
+            });
+          })
+          .then(
+            ({ character, film, planet }) =>
+              `${character.name} is featured in ${film.title}, directed by ${film.director} and it takes place on ${planet.name}`
+          )
+          .fail((err) => err);
       }
 
       starWarsStringThree(1).then(function (data) {
