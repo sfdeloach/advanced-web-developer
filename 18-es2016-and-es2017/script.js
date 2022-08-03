@@ -26,7 +26,12 @@ hasMostFollowers("elie", "tigarcia", "colt").then(function (data) {
 //    number passed to the function. Your function should return a promise that when resolved will
 //    console.log the name of the character.
 
-starWarsString(1).then(function (data) {
+async function starWarsStringOne(num) {
+  const character = await $.getJSON(`https://swapi.dev/api/people/${num}`);
+  return character.name;
+}
+
+starWarsStringOne(1).then(function (data) {
   console.log(data); // "Luke Skywalker"
 });
 
@@ -34,7 +39,13 @@ starWarsString(1).then(function (data) {
 // first film that character is featured in and return a promise that when resolved will console.log
 // the name of the character and the film they are featured in
 
-starWarsString(1).then(function (data) {
+async function starWarsStringTwo(num) {
+  const character = await $.getJSON(`https://swapi.dev/api/people/${num}`);
+  const film = await $.getJSON(character.films[0]);
+  return `${character.name} is featured in ${film.title}, directed by ${film.director}`;
+}
+
+starWarsStringTwo(1).then(function (data) {
   console.log(data); // "Luke Skywalker is featured in The Empire Strikes Back, directed by Irvin Kershner"
 });
 
@@ -43,6 +54,13 @@ starWarsString(1).then(function (data) {
 // will console.log the name of the character and the film they are featured in and the name of the
 // planet.
 
-starWarsString(1).then(function (data) {
+async function starWarsStringThree(num) {
+  const character = await $.getJSON(`https://swapi.dev/api/people/${num}`);
+  const film = await $.getJSON(character.films[num]);
+  const planet = await $.getJSON(film.planets[num]);
+  return `${character.name} is featured in ${film.title}, directed by ${film.director} and it takes place on ${planet.name}`;
+}
+
+starWarsStringThree(1).then(function (data) {
   console.log(data); // "Luke Skywalker is featured in The Empire Strikes Back, directed by Irvin Kershner and it takes place on Hoth"
 });
