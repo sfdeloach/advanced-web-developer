@@ -1,0 +1,84 @@
+body {
+  background-color: black;
+  color: lime;
+  font-family: monospace;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+
+.banner{
+  margin-top: 48px;
+}
+
+button {
+  margin-top: 32px;
+  background-color: black;
+  color: lime;
+  border: 2px solid lime;
+  border-radius: 4px;
+  font-size: 32px;
+  font-family: monospace;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: lime;
+  color: black;
+}
+
+button:active {
+  background-color: black;
+  color: lime;
+}
+
+#words {
+  margin-top: 32px;
+}
+
+#words p.unselected,
+#words p.incorrect,
+#words p.correct {
+  padding: 6px;
+  height: 20px;
+  font-size: 12px;
+  margin: 0px;
+  text-align: center;
+}
+
+#words p.unselected:hover {
+  padding: 2px;
+  height: 28px;
+  font-size: 18px;
+  color: yellow;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#words p.incorrect {
+  color: lightgray;
+}
+
+#words p.correct {
+  color: yellow;
+}
+
+#status {
+  margin-top: 24px;
+  text-align: center;
+}
+
+#game-over span:nth-child(2n) {
+  text-decoration: underline;
+  cursor: pointer;
+}
