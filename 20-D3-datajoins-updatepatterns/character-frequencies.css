@@ -14,7 +14,8 @@ body {
 }
 
 .user-input > h1,
-.graph > h2 {
+.results > h2,
+.results > h4 {
   text-align: center;
 }
 
