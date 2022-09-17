@@ -69,8 +69,9 @@ document.querySelector("form").onsubmit = (event) => {
   const mySelection = d3
     .select("#graph")
     .selectAll("div")
+    .data(cf.characterFrequency, (d) => d.char)
     // make unique changes to update selection
-    .data(cf.characterFrequency, (d) => d.char);
+    .style("color", "black");
 
   // remove exit selection
   mySelection.exit().remove();
@@ -81,6 +82,8 @@ document.querySelector("form").onsubmit = (event) => {
     // make unique changes to enter selection
     .merge(mySelection)
     // make changes to both selections
+    .attr("class", "char")
+    .style("height", (d) => d.count * 24 + "px")
     .text((d) => d.char);
 
   document.querySelector(".results").classList.remove("hide");
