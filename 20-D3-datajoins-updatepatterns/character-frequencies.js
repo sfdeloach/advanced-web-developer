@@ -52,14 +52,14 @@ class CharacterFrequency {
 
 let cf = new CharacterFrequency();
 
-document.querySelector("form").onsubmit = (event) => {
-  event.preventDefault();
+d3.select("form").on("submit", function () {
+  d3.event.preventDefault();
 
-  const letters = document.querySelector("#letters");
-  cf.updateCharFreq(letters.value);
+  const letters = d3.select("#letters").property("value");
+  cf.updateCharFreq(letters);
 
-  document.querySelector(".results > h2 > span").innerHTML = letters.value;
-  document.querySelector(".results > h4 > span").innerHTML = cf.newCharactersTotal;
+  d3.select(".results > h2 > span").property("innerHTML", letters);
+  d3.select(".results > h4 > span").property("innerHTML", cf.newCharactersTotal);
 
   /*
   # General Update pattern
@@ -72,20 +72,25 @@ document.querySelector("form").onsubmit = (event) => {
      both selections.
   */
 
+  // Define the selection on the page and the data to model
   const mySelection = d3
     .select("#graph")
     .selectAll("div")
-    .data(cf.characterFrequency, (d) => d.char)
-    // make unique changes to update selection
-    .style("color", "black");
+    .data(cf.characterFrequency, (d) => d.char);
 
-  // remove exit selection
+  // The selection only contains data that was already associated with it, this is referred to as
+  // the "update" selection, make changes unique to the "update" selection now
+  mySelection.style("color", "black");
+
+  // There may be items selected that are no longer associated to data, remove this "exit" selection
   mySelection.exit().remove();
 
+  // Now create new views for new data by selecting the "enter" selection, also make any changes
+  // unique only to this selection (no changes are made in this example)
+  mySelection.enter().append("div");
+
+  // Merge all selections and make any changes that apply to both the update and enter selections
   mySelection
-    .enter()
-    .append("div")
-    // make unique changes to enter selection
     .merge(mySelection)
     // make changes to both selections
     .attr("class", "char")
@@ -93,14 +98,19 @@ document.querySelector("form").onsubmit = (event) => {
     .text((d) => d.char);
 
   // show the graph and clear the input field
-  document.querySelector(".results").classList.remove("hide");
-  letters.value = "";
-};
+  d3.select(".results").classed("hide", false);
+  d3.select("#letters").property("value", "");
+});
 
 // Reset the form, create a new reference to the character frequency object, remove the data set
 // from the D3 object, and hide the graph portion of the page
 document.querySelector("form > #reset").addEventListener("click", (event) => {
+  // create a new character frequency object
   cf = new CharacterFrequency();
+
+  // assign an empty dataset to the model
   d3.select("#graph").selectAll("div").data([]).exit().remove();
-  document.querySelector(".results").classList.add("hide");
+
+  // hide the results area of the page
+  d3.select(".results").classed("hide", true);
 });
