@@ -78,6 +78,8 @@ d3.select("form").on("submit", function () {
     .selectAll("div")
     .data(cf.characterFrequency, (d) => d.char);
 
+  console.log(mySelection);
+
   // The selection only contains data that was already associated with it, this is referred to as
   // the "update" selection, make changes unique to the "update" selection now
   mySelection.style("color", "black");
@@ -86,16 +88,15 @@ d3.select("form").on("submit", function () {
   mySelection.exit().remove();
 
   // Now create new views for new data by selecting the "enter" selection, also make any changes
-  // unique only to this selection (no changes are made in this example)
-  mySelection.enter().append("div");
-
-  // Merge all selections and make any changes that apply to both the update and enter selections
+  // unique only to this selection (no changes are made in this example). Note that the merge
+  // function is chained to the enter selection.
   mySelection
-    .merge(mySelection)
-    // make changes to both selections
+    .enter()
+    .append("div")
     .attr("class", "char")
-    .style("height", (d) => d.count * 24 + "px")
-    .text((d) => d.char);
+    .text((d) => d.char)
+    .merge(mySelection) // from now on, enter and update selection
+    .style("height", (d) => d.count * 24 + "px");
 
   // show the graph and clear the input field
   d3.select(".results").classed("hide", false);
