@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0 auto;
+        background-color: lightgray;
+      }
+      svg {
+        background-color: white;
+        border: 1px dotted gray;
+        margin-left: 10vw;
+        margin-top: 10vh;
+        width: 80vw;
+        height: 80vh;
+      }
+      text {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 200%;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="800" cy="500" r="100" fill="purple" />
+      <text
+        x="800"
+        y="500"
+        text-anchor="middle"
+        alignment-baseline="middle"
+        stroke="black"
+        stroke-width="2px"
+        fill="white"
+        transform="rotate(-30, 800,500)"
+      >
+        &lt;circle /&gt;
+      </text>
+      <polygon points="800,50 825,25 850,50 850,100 800,100" fill="yellow" stroke="black" />
+      <!-- x & y - top left corner of the rectangle
+           rx & ry - radius of corners -->
+      <rect
+        x="100"
+        y="300"
+        rx="50"
+        ry="50"
+        width="400"
+        height="200"
+        stroke-width="40px"
+        stroke="red"
+        fill="blue"
+      />
+      <!-- g stands for group -->
+      <g stroke-width="5px" stroke="blue">
+        <line x1="50" y1="50" x2="700" y2="350" />
+        <line x1="50" y1="350" x2="700" y2="50" />
+      </g>
+    </svg>
+  </body>
+</html>
