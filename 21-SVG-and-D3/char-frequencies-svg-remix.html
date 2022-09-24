@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="char-frequencies-svg-remix.css" />
+    <title>Character Frequency D3 Remix</title>
+  </head>
+  <body>
+    <div class="user-input">
+      <h1>Letter Analyzer</h1>
+      <form action="">
+        <input type="text" name="letters" id="letters" />
+        <button type="submit">Count the Letters!</button>
+        <button type="reset" id="reset">Reset</button>
+      </form>
+    </div>
+    <div class="results">
+      <h2></h2>
+      <h4></h4>
+      <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" id="graph"></svg>
+    </div>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="char-frequencies-svg-remix.js"></script>
+  </body>
+</html>

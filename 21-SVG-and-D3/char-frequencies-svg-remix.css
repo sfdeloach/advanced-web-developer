@@ -1,0 +1,98 @@
+body {
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.user-input {
+  color: white;
+  background-color: #6a7de6;
+  padding: 40px 0;
+}
+
+.user-input > h1,
+.results > h2,
+.results > h4 {
+  text-align: center;
+}
+
+.user-input > form {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.user-input > form > input {
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 300;
+  height: 40px;
+  padding: 0 20px;
+  width: 40%;
+}
+
+.user-input > form > input:focus {
+  outline: none;
+}
+
+.user-input > form > button {
+  align-items: center;
+  background-color: #3a51d1;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 20px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  overflow: hidden;
+  padding: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+}
+
+.user-input > form > button:hover {
+  background-color: #162eb1;
+  color: #ffffff;
+}
+
+.user-input > form > button:active {
+  background: #091975;
+  color: rgb(255, 255, 255, 0.7);
+}
+
+svg#graph {
+  outline: #fbfbfb solid 0.5vw;
+  width: 98vw;
+  height: 40vh;
+  margin: 1vw;
+}
+
+.old {
+  fill: #162eb1;
+}
+
+.new {
+  fill: #6a7de6;
+}
+
+text.old,
+text.new {
+  text-anchor: middle;
+  fill: #ffffff;
+}
+
+text.new {
+  font-weight: bold;
+  font-size: larger;
+}
