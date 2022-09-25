@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scatterplot</title>
+    <style>
+      svg .tick line {
+        stroke: #ddd;
+        stroke-dasharray: 10 2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Scatterplot Example</h1>
+    <h2>Births Per Capita vs Life Expectancy</h2>
+    <svg></svg>
+    <script src="../d3.v4.js"></script>
+    <script src="./birthData2011.js"></script>
+    <script>
+      window.onload = event => {
+        // Define plot characteristics, 16:9 ratio
+        const height = 9 * 60;
+        const width = 16 * 60;
+        const padding = 20;
+
+        // Define scaling functions
+        const yScale = d3
+          .scaleLinear()
+          .domain(d3.extent(birthData2011, d => d.lifeExpectancy))
+          .range([height - padding, padding]);
+
+        const xScale = d3
+          .scaleLinear()
+          .domain(d3.extent(birthData2011, d => d.births / d.population))
+          .range([padding, width - padding]);
+
+        const colorScale = d3
+          .scaleLinear()
+          .domain(d3.extent(birthData2011, d => d.population / d.area))
+          .range(['lightcoral', 'black']);
+
+        const radiusScale = d3
+          .scaleLinear()
+          .domain(d3.extent(birthData2011, d => d.births))
+          .range([4, 16]);
+
+        // Create axes
+        const yAxis = d3
+          .axisLeft(yScale)
+          .tickSize(-width + 2 * padding)
+          .tickSizeOuter(0);
+
+        d3.select('svg')
+          .append('g')
+          .attr('transform', 'translate(' + padding + ',0)')
+          .call(yAxis);
+
+        const xAxis = d3
+          .axisBottom(xScale)
+          .tickSize(-height + 2 * padding)
+          .tickSizeOuter(0);
+
+        d3.select('svg')
+          .append('g')
+          .attr('transform', 'translate(0,' + (height - padding) + ')')
+          .call(xAxis);
+
+        // Create plot
+        d3.select('svg')
+          .attr('height', height)
+          .attr('width', width)
+          .selectAll('circle')
+          .data(birthData2011)
+          .enter()
+          .append('circle')
+          .attr('cy', d => yScale(d.lifeExpectancy))
+          .attr('cx', d => xScale(d.births / d.population))
+          .attr('fill', d => colorScale(d.population / d.area))
+          .attr('r', d => radiusScale(d.births));
+      };
+    </script>
+  </body>
+</html>
