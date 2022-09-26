@@ -14,7 +14,7 @@
   </head>
   <body>
     <h1>Scatterplot Example</h1>
-    <h2>Births Per Capita vs Life Expectancy</h2>
+    <h2>Life Expectancy vs Births Per Capita</h2>
     <svg></svg>
     <script src="../d3.v4.js"></script>
     <script src="./birthData2011.js"></script>
@@ -23,7 +23,7 @@
         // Define plot characteristics, 16:9 ratio
         const height = 9 * 60;
         const width = 16 * 60;
-        const padding = 20;
+        const padding = 30;
 
         // Define scaling functions
         const yScale = d3
@@ -66,6 +66,33 @@
           .append('g')
           .attr('transform', 'translate(0,' + (height - padding) + ')')
           .call(xAxis);
+
+        // Create labels for axes
+        d3.select('svg')
+          .append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('x', -height / 2)
+          .attr('y', padding)
+          .attr('dy', '-1.1em')
+          .style('text-anchor', 'middle')
+          .text('Life Expectancy');
+
+        d3.select('svg')
+          .append('text')
+          .attr('x', width / 2)
+          .attr('y', height - padding)
+          .attr('dy', '1.5em')
+          .style('text-anchor', 'middle')
+          .text('Births Per Capita');
+
+        // Create title
+        d3.select('svg')
+          .append('text')
+          .attr('x', width / 2)
+          .attr('y', padding)
+          .style('text-anchor', 'middle')
+          .style('font-size', '1.5em')
+          .text('Data on Births by Country in 2011');
 
         // Create plot
         d3.select('svg')
