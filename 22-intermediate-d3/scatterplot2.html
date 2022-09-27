@@ -22,6 +22,10 @@
         stroke: #ccc;
         stroke-dasharray: 10 2;
       }
+
+      circle {
+        stroke-width: 0.1em;
+      }
     </style>
   </head>
   <body>
@@ -36,7 +40,7 @@
           "urbanPopulationRate",
           "medianAge",
         ]) {
-          if (!key in obj || !obj[key]) return false;
+          if (!obj[key]) return false;
         }
 
         return true;
@@ -76,7 +80,14 @@
           .scaleLinear()
           .domain(urbanPopulationRateExtent)
           .range([0.05 * scale, 0.3 * scale]);
-        const colorScale = d3.scaleLinear().domain(medianAgeExtent).range(["#adff2f", "blue"]);
+        const colorScale = d3
+          .scaleLinear()
+          .domain(medianAgeExtent)
+          .range(["rgb(173, 255, 47)", "rgb(0, 0, 255)"]);
+        const opacityScale = d3
+          .scaleLinear()
+          .domain(medianAgeExtent)
+          .range(["rgba(173, 255, 47, 0.25)", "rgba(0, 0, 255, 0.25)"]);
 
         // Plot axes
         const yAxis = d3
@@ -114,7 +125,7 @@
           .attr("transform", "rotate(-90)")
           .attr("x", -height / 2)
           .attr("y", padding)
-          .attr("dy", "-1.4em")
+          .attr("dy", -0.55 * padding)
           .style("text-anchor", "middle")
           .text("Subscribers Per 100");
 
@@ -122,7 +133,7 @@
           .append("text")
           .attr("x", width / 2)
           .attr("y", height - padding)
-          .attr("dy", "1.7em")
+          .attr("dy", 0.75 * padding)
           .style("text-anchor", "middle")
           .text("Adult Literacy Rate");
 
@@ -135,7 +146,8 @@
           .attr("cy", (d) => yScale(d.subscribersPer100))
           .attr("cx", (d) => xScale(d.adultLiteracyRate))
           .attr("r", (d) => radiusScale(d.urbanPopulationRate))
-          .style("fill", (d) => colorScale(d.medianAge));
+          .style("fill", (d) => opacityScale(d.medianAge))
+          .style("stroke", (d) => colorScale(d.medianAge));
       };
     </script>
   </body>
