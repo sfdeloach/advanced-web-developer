@@ -6,7 +6,7 @@
 d3.max(dataArr {, callback})
 d3.min(dataArr {, callback})
 
-d3.extent(dataArr {, callback}) // returns [min, max]
+d3.extent(dataArr {, callback}) // returns an array [min, max]
 ```
 
 The optional callback function is how to associate values to array element, this can be helpful when
@@ -26,7 +26,7 @@ d3.scaleLinear()
 ```
 
 This function linearly maps a domain to a range, helpful when dealing with the reversed y-axis as
-shown in the above example. The arguments passed to domain and range must be an array
+shown in the above example. The arguments passed to domain and range must be an array.
 
 ## Axes
 
