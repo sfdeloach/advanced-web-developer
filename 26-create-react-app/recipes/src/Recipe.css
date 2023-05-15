@@ -1,0 +1,27 @@
+.recipe {
+  border: #8a8a8a solid 1px;
+  box-shadow: 2px 2px 2px #8a8a8a;
+  border-radius: 8px;
+  width: 30%;
+  min-width: 350px;
+  background-color: white;
+}
+
+.recipe:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
+img {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  outline: #8a8a8a solid 1px;
+}
+
+.recipe-text {
+  padding-left: 16px;
+  padding-right: 16px;
+}

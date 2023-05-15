@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise: Random Box</title>
+    <script src="https://unpkg.com/react@16.0.0-rc.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0-rc.2/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        class Box extends React.Component {
+            render() {
+                const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+                const sizes = ["1", "1.25", "1.5", "1.75", "2", "2.25", "2.5"];
+
+                const divStyle = {
+                    backgroundColor: colors[getRandomInt(colors.length)],
+                    padding: "2em",
+                    width: "50vw",
+                    height: "200px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                };
+
+                const h1Style = { fontSize: `${sizes[getRandomInt(sizes.length)]}em` };
+
+                return (
+                    <div style={divStyle}>
+                        <h1 style={h1Style}>Random Box</h1>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Box />, document.getElementById("app"));
+    </script>
+</body>
+
+</html>
