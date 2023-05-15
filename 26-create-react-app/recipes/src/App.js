@@ -1,16 +1,17 @@
-import Recipe from './Recipe';
-import './App.css';
+import { Component } from "react";
+import TopBar from "./TopBar";
+import RecipeList from "./RecipeList";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <Recipe title="Pasta"
-        ingredients={["eggs", "flour", "water"]}
-        image="pasta.jpg"
-        instructions="Combine all listed ingredients in a bowl and mix it up, you fool."
-      />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <TopBar />
+        <RecipeList />
+      </div>
+    );
+  }
 }
 
 export default App;
