@@ -5,6 +5,7 @@
   width: 30%;
   min-width: 350px;
   background-color: white;
+  margin-top: 24px;
 }
 
 .recipe:hover {
