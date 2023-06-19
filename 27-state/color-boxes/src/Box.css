@@ -1,0 +1,12 @@
+.Box {
+  width: 12.383vw;
+  height: 12.383vw;
+  color: #ce8f53;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-shadow: rgb(8, 7, 56) 1px 1px 4px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
