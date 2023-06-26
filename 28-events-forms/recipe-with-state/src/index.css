@@ -1,0 +1,76 @@
+body {
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.navbar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background: linear-gradient(#fff, 85%, #eee);
+  height: 4rem;
+  padding: 0rem 1rem;
+}
+
+.logo .material-symbols-outlined {
+  font-size: 1.5rem;
+}
+
+.logo,
+.dropdown,
+.menu,
+.menu-item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  gap: 4rem;
+}
+
+.dropdown:hover,
+.menu-item:hover {
+  color: #777;
+}
+
+.dropdown:active,
+.menu-item:active {
+  color: #bbb;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 500px) {
+  .menu {
+    display: flex;
+  }
+
+  .dropdown {
+    display: none;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .logo .material-symbols-outlined {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .navbar {
+    padding: 0rem 4rem;
+  }
+}
