@@ -1,0 +1,19 @@
+.navbar.dark {
+  background: linear-gradient(var(--dark-background), 85%, var(--dark-gradient));
+}
+
+.logo.dark,
+.dropdown.dark,
+.menu-item.dark {
+  color: var(--dark-text);
+}
+
+.dropdown.dark:hover,
+.menu-item.dark:hover {
+  color: var(--dark-hover);
+}
+
+.dropdown.dark:active,
+.menu-item.dark:active {
+  color: var(--dark-active);
+}

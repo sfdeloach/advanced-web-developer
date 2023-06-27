@@ -1,18 +1,32 @@
+html {
+  --light-text: #000000;
+  --light-hover: #777777;
+  --light-active: #bbbbbb;
+  --light-gradient: #eeeeee;
+  --light-background: #ffffff;
+  --dark-text: #dddddd;
+  --dark-hover: #888888;
+  --dark-active: #444444;
+  --dark-gradient: #444444;
+  --dark-background: #161616;
+}
+
 body {
   margin: 0 auto;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .material-symbols-outlined {
-  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
 .navbar {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  background: linear-gradient(#fff, 85%, #eee);
-  height: 4rem;
+  background: linear-gradient(var(--light-background), 85%, var(--light-gradient));
+  height: 8vh;
+  min-height: 4rem;
   padding: 0rem 1rem;
 }
 
@@ -38,12 +52,12 @@ body {
 
 .dropdown:hover,
 .menu-item:hover {
-  color: #777;
+  color: var(--light-hover);
 }
 
 .dropdown:active,
 .menu-item:active {
-  color: #bbb;
+  color: var(--light-active);
 }
 
 .subtitle {
