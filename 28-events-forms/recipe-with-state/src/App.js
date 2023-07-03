@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import ThemeContext from './contexts/Theme';
 import Navbar from './Navbar';
 import Content from './Content';
-import ThemeContext from './contexts/Theme';
 
 function App() {
   const [theme, setTheme] = useState('light');

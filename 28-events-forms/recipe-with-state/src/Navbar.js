@@ -8,8 +8,8 @@ function Navbar({ onThemeClick }) {
   return (
     <div className={`navbar ${theme}`}>
       <div className={`logo ${theme}`}>
-        <span className='material-symbols-outlined'>settings</span>
-        <div className='subtitle'>Frameworks</div>
+        <span className='material-symbols-outlined'>dining</span>
+        <div className='subtitle'>Recipes</div>
       </div>
       <div className='menu'>
         <div className={`menu-item ${theme}`} onClick={() => console.log('add item click')}>
