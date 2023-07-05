@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import ThemeContext from './contexts/Theme';
 import './Navbar.css';
 
-function Navbar({ onThemeClick }) {
+function Navbar({ onAddClick, onThemeClick }) {
   const theme = useContext(ThemeContext);
 
   return (
@@ -12,7 +12,7 @@ function Navbar({ onThemeClick }) {
         <div className='subtitle'>Recipes</div>
       </div>
       <div className='menu'>
-        <div className={`menu-item ${theme}`} onClick={() => console.log('add item click')}>
+        <div className={`menu-item ${theme}`} onClick={onAddClick}>
           <span className='material-symbols-outlined'>add_circle</span>
           <div>Add</div>
         </div>

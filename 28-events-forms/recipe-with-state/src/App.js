@@ -5,6 +5,7 @@ import Content from './Content';
 
 function App() {
   const [theme, setTheme] = useState('light');
+  const [page, setPage] = useState('list');
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -12,8 +13,16 @@ function App() {
         onThemeClick={() => {
           theme === 'light' ? setTheme('dark') : setTheme('light');
         }}
+        onAddClick={() => {
+          setPage('form');
+        }}
       />
-      <Content />
+      <Content
+        router={page}
+        onReturnClick={() => {
+          setPage('list');
+        }}
+      />
     </ThemeContext.Provider>
   );
 }

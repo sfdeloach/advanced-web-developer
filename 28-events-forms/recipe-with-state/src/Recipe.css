@@ -2,7 +2,7 @@
   --box-size: 320px;
   display: flex;
   flex-flow: column nowrap;
-  padding: 0.5rem 0rem;
+  padding-bottom: 1rem;
   border: 1px var(--light-gradient) solid;
   box-shadow: 2px 2px 10px 1px var(--light-gradient);
   border-radius: 1rem;
@@ -16,6 +16,7 @@
 }
 
 .title {
+  padding: 1rem 0rem;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -24,10 +25,30 @@
 .image {
   width: var(--box-size);
   max-height: var(--box-size);
+  object-fit: cover;
+  object-position: center;
+}
+
+.section {
+  padding-top: 1rem;
+  padding-left: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid var(--light-gradient);
+}
+
+tr.dark {
+  border-bottom: 1px solid var(--dark-gradient);
 }
 
 td {
-  border: 1px solid var(--light-active);
+  padding: 0.25rem;
+  min-width: 3rem;
 }
 
 ul {
