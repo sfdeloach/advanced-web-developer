@@ -1,0 +1,22 @@
+/* The following used for reference, to change colors in the app, refer to ./assets/settings.jsx */
+:root {
+  --navbarBackground: #3f7894;
+  --navbarText: #f2efe9;
+  --navbarTextHover: #cbbbbb;
+  --appBackground: #f2efe9;
+  --cardBack: #cbbbbb;
+  --colorRed: #dc1d1d;
+  --colorOrange: #d57c0f;
+  --colorYellow: #d9d91d;
+  --colorGreen: #54be54;
+  --colorBlue: #9595ff;
+  --colorIndigo: #7d00d7;
+  --colorViolet: #ee82ee;
+  --colorPurple: #9c219c;
+}
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--appBackground);
+}
