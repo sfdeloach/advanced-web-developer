@@ -11,7 +11,7 @@ function Card({ card, handleCardClick }) {
         margin: '8px',
         cursor: 'pointer'
       }}
-      onClick={() => handleCardClick(card.id)}
+      onClick={() => !card.isVisible && handleCardClick(card.id)}
     ></div>
   );
 }
