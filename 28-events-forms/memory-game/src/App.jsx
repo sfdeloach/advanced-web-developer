@@ -49,27 +49,16 @@ function App() {
     setSelected([...selected, cards[id]]);
   }
 
-  function getRandomInt(max, min = 0) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-  }
-
   function createCards(quantity = 16, numColors = CARD_COLORS.length) {
-    const topCards = new Set(),
-      bottomCards = new Set();
+    const uniqueNums = new Set();
 
-    while (topCards.size < numColors) {
-      topCards.add(getRandomInt(numColors));
+    while (uniqueNums.size < quantity) {
+      uniqueNums.add(Math.floor(Math.random() * Math.floor(numColors * 2)));
     }
 
-    while (bottomCards.size < numColors) {
-      bottomCards.add(getRandomInt(numColors));
-    }
-
-    return [...topCards, ...bottomCards].map((colorNumber, idx) => {
+    return [...uniqueNums].map((colorNumber, idx) => {
       return {
-        colorValue: colorNumber,
+        colorValue: colorNumber % 8,
         id: idx,
         isEnabled: true,
         isVisible: false
@@ -77,13 +66,9 @@ function App() {
     });
   }
 
-  function resetGame() {
-    setCards(createCards());
-  }
-
   return (
     <>
-      <Navbar handleNewGameClick={resetGame} />
+      <Navbar handleNewGameClick={() => setCards(createCards())} />
       <Game cards={cards} handleCardClick={handleCardClick} />
     </>
   );
