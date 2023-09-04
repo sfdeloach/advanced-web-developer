@@ -1,0 +1,18 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  margin-top: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+svg {
+  margin-top: 1rem;
+  max-width: 600px;
+}
+
+image {
+  border: 1px solid black;
+}
