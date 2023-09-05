@@ -26,7 +26,7 @@ function App() {
       setMessage('That is correct!');
     } else {
       setMessage(
-        'That is incorrect. The correct answer is ' + countries[+correctCountry].name.common + '.'
+        `That is incorrect. The correct answer is ${countries[+correctCountry].name.common}.`
       );
     }
   }
@@ -42,6 +42,7 @@ function App() {
     let temp;
     let index;
 
+    // shuffle all countries
     while (i--) {
       index = Math.floor((i + 1) * Math.random());
       temp = shuffled[index];
@@ -49,7 +50,7 @@ function App() {
       shuffled[i] = temp;
     }
 
-    // randomly set four countries as choices
+    // select first four countries for the game
     setCountries(shuffled.slice(0, 4));
 
     // pick random country as answer
